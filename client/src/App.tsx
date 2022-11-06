@@ -5,6 +5,10 @@ function App() {
 	// eslint-disable-next-line
 	const [petitions, setPetitions] = useState([]);
 
+	// TODO should have refresh button
+	// TODO should have welcome page without courses
+	// TODO auth page to do firstly
+
 	return (
 		<div>
 			<header className="header-class"></header>
