@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="75726583-10ff-4a00-942b-28231759146d" name="Changes" comment="Update Teacher controller with new endpoints">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/main/classroomy/ClassroomyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/main/classroomy/ClassroomyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/main/classroomy/controlller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/main/classroomy/controlller/CourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2GrcklbjiFMGgWWykUdRkWlnQDJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/tarasbohdan/Desktop/university/Term Project/Classroomy/server",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "spring.configuration.checksum": "ff8abacb680376f6a247d58ea9c1c674"
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.main.classroomy.controlller" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ClassroomyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <envs>
+        <env name="DB_HOST" value="localhost" />
+        <env name="DB_PORT" value="5432" />
+        <env name="DB_NAME" value="classroomy" />
+        <env name="DB_USERNAME" value="admin" />
+        <env name="DB_PASSWORD" value="admin" />
+      </envs>
+      <module name="classroomy" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.main.classroomy.ClassroomyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="75726583-10ff-4a00-942b-28231759146d" name="Changes" comment="" />
+      <created>1667150293897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667150293897</updated>
+      <workItem from="1667150295703" duration="1048000" />
+      <workItem from="1667211151323" duration="78000" />
+      <workItem from="1667462456048" duration="60000" />
+      <workItem from="1667462544206" duration="924000" />
+      <workItem from="1667749027056" duration="2096000" />
+      <workItem from="1668687608188" duration="3130000" />
+      <workItem from="1668691889784" duration="463000" />
+    </task>
+    <task id="LOCAL-00001" summary="Update course logic">
+      <created>1667750201214</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667750201215</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update Student logic">
+      <created>1667750212934</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667750212935</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update Teacher logic">
+      <created>1667750223341</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667750223342</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add ModelMapper to the project">
+      <created>1667750238227</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667750238228</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update Student controller with new endpoints">
+      <created>1667750979406</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667750979406</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update Teacher controller with new endpoints">
+      <created>1667750993653</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667750993653</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update course logic" />
+    <MESSAGE value="Update Student logic" />
+    <MESSAGE value="Update Teacher logic" />
+    <MESSAGE value="Add ModelMapper to the project" />
+    <MESSAGE value="Update Student controller with new endpoints" />
+    <MESSAGE value="Update Teacher controller with new endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Teacher controller with new endpoints" />
+  </component>
+</project>
