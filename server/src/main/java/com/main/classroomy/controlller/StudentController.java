@@ -1,6 +1,6 @@
 package com.main.classroomy.controlller;
 
-import com.main.classroomy.controlller.dto.StudentDto;
+import com.main.classroomy.entity.dto.StudentDto;
 import com.main.classroomy.entity.Student;
 import com.main.classroomy.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController {
 
     private final StudentService studentService;

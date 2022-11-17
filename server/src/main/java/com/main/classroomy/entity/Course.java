@@ -5,10 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -17,13 +16,11 @@ import java.util.List;
 public class Course {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     private String name;
 
     private String description;
-
-    @OneToMany
-    private List<Teacher> teachers = new ArrayList<>();
 
 }

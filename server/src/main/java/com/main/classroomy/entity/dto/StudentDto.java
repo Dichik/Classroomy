@@ -1,4 +1,4 @@
-package com.main.classroomy.controlller.dto;
+package com.main.classroomy.entity.dto;
 
 import lombok.Data;
 
