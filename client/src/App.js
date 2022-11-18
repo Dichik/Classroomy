@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import Search from "./search/Search";
 
 export default function App() {
   // eslint-disable-next-line
@@ -13,12 +14,14 @@ export default function App() {
   useEffect(() => {
     setLoading(true);
 
-    fetch("/courses")
-      .then((response) => response.json())
-      .then((data) => {
-        setCourses(data);
-        setLoading(false);
-      });
+    // fetch("/courses")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setCourses(data);
+    //     setLoading(false);
+    //   });
+    setCourses([]);
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -29,6 +32,7 @@ export default function App() {
     <div>
       <header className="header-class"></header>
       <h1 className="title-name">Hello world!</h1>
+      <Search courses={courses} />
       {courses.map((course) => {
         return (
           <div key={course.id}>
