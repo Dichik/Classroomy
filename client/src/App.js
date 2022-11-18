@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
+export default function App() {
   // eslint-disable-next-line
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,12 +13,11 @@ function App() {
   useEffect(() => {
     setLoading(true);
 
-    fetch("api/courses")
+    fetch("/courses")
       .then((response) => response.json())
       .then((data) => {
         setCourses(data);
         setLoading(false);
-        console.log(courses);
       });
   }, []);
 
@@ -29,10 +28,17 @@ function App() {
   return (
     <div>
       <header className="header-class"></header>
-      <h1 className="title-name">Hello world!</h1>${courses}
+      <h1 className="title-name">Hello world!</h1>
+      {courses.map((course) => {
+        return (
+          <div key={course.id}>
+            <h2>name: {course.name}</h2>
+            <h2>country: {course.description}</h2>
+            <hr />
+          </div>
+        );
+      })}
       <footer className="footer-class"></footer>
     </div>
   );
 }
-
-export default App;
