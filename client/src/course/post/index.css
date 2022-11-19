@@ -1,0 +1,25 @@
+.post-box {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    height: 85px;
+
+    background: #D5FFF7;
+    border-radius: 15px;
+
+    margin-top: 20px;
+    margin-left: 25%;
+
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+}
+
+.tick-todo-image {
+    position: fixed;
+    padding-right: 49%;
+    padding-bottom: 6%;
+}
