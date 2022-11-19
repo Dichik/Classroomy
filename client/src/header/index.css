@@ -1,0 +1,55 @@
+.header-app-box {
+    position: relative;
+
+    width: 120px;
+    height: 40px;
+
+    background: #ffffff;
+    border-radius: 15px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.header-app-name {
+    top: 10px;
+    left: 5%;
+}
+
+.header-app-name-title {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Trebuchet MS', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+
+    color: #000000;
+}
+
+.header-app-name-title:hover {
+    color: var(--main-color);
+}
+
+.header-app-my-courses {
+    float: right;
+    margin-right: 15%;
+    margin-top: -2%;
+
+    transition-duration: 0.4s;
+}
+
+.header-app-box:hover {
+    background-color: black;
+}
+
+.header-class {
+    position: relative;
+
+    width: 100%;
+    height: 60px;
+    background-color: var(--main-color);
+}

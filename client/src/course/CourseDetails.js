@@ -1,17 +1,18 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-export default function CourseDetails({ course }) {
-    const [loading, setLoading] = useState(false)
-    const [courseDetails, setCourseDatails] = useState(null)
+const CourseDetails = () => {
+    const params = useParams();
+    const [loading, setLoading] = useState(false);
+    const [courseDetails, setCourseDatails] = useState(null);
     const initCourseDetails = {
-        "id": course.id,
-        "name": course.name,
-        "description": course.description
-    }
+        id: params.id,
+        name: 'course.name',
+        description: 'course.description'
+    };
 
     useEffect(() => {
         setLoading(true);
-
 
         // fetch('/courses/{course.id}')
         //     .then((response) => response.json())
@@ -19,22 +20,22 @@ export default function CourseDetails({ course }) {
         //         setCourses(data);
         //         setLoading(false);
         //     });
-        setCourseDatails(initCourseDetails)
-        console.log(courseDetails)
-        setLoading(false)
+        console.log(params.id);
+        setCourseDatails(initCourseDetails);
+        console.log(courseDetails);
+        setLoading(false);
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
-
     return (
-        <div>
+        <div className="course-details-page">
             <h2>{initCourseDetails.name}</h2>
-            <div>
-
-            </div>
+            <div></div>
         </div>
-    )
-}
+    );
+};
+
+export default CourseDetails;
