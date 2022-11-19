@@ -2,6 +2,7 @@ package com.main.classroomy.service;
 
 import com.main.classroomy.entity.Course;
 import com.main.classroomy.entity.dto.CourseDto;
+import com.main.classroomy.exception.CourseNotFoundException;
 import com.main.classroomy.repository.CourseRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class CourseService {
         return this.courseRepository.findAll();
     }
 
+    public Course getById(Long id) {
+        return this.courseRepository.findById(id)
+                .orElseThrow(() -> new CourseNotFoundException("Course with id=" + id + " was not found!"));
+    }
+
     public Course create(CourseDto courseDto) {
         return this.courseRepository.save(
                 this.modelMapper.map(courseDto, Course.class)
@@ -32,7 +38,16 @@ public class CourseService {
     }
 
     public void updateById(Long id, CourseDto courseDto) {
-        // TODO implement update method
+        if (!this.courseRepository.existsById(id)) {
+            throw new CourseNotFoundException("Course with id=" + id + " was not found!");
+        }
+        Course course = this.modelMapper.map(courseDto, Course.class);
+        course.setId(id);
+        this.courseRepository.save(course);
+    }
+
+    public void deleteById(Long id) {
+        this.courseRepository.deleteById(id);
     }
 
 }

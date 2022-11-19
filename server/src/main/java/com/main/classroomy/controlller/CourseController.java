@@ -15,12 +15,10 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public CourseController(CourseService courseService, ModelMapper modelMapper) {
+    public CourseController(CourseService courseService) {
         this.courseService = courseService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -30,7 +28,7 @@ public class CourseController {
 
     @GetMapping("/{id:\\d+}")
     public Course getById(@PathVariable Long id) {
-        return null;
+        return this.courseService.getById(id);
     }
 
     @PostMapping
@@ -39,13 +37,13 @@ public class CourseController {
     }
 
     @PutMapping("/{id:\\d+}")
-    public void updateById(@PathVariable Long id) { // FIXME
-
+    public void updateById(@PathVariable Long id, @Valid @RequestBody CourseDto courseDto) {
+        this.courseService.updateById(id, courseDto);
     }
 
     @DeleteMapping("{id:\\d+}")
     public void deleteById(@PathVariable Long id) {
-
+        this.courseService.deleteById(id);
     }
 
 }

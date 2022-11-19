@@ -6,20 +6,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalTime;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "posts")
 public class Post {
 
     @Id
     private Long id;
-
-    private Long teacherId;
-
-    private Long courseId;
 
     private String title;
 
@@ -27,6 +25,9 @@ public class Post {
 
     private String attachment; // TODO new class/entity?
 
-    private LocalTime deadline;
+    private Long teacherId;
+
+    private Long courseId;
+
 
 }
