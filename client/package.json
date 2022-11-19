@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "npx prettier --write .",
+    "prepare": "husky install"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
@@ -32,6 +34,13 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "2.7.1"
   },
   "browserslist": {
     "production": [

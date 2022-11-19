@@ -1,60 +1,82 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import Course from "./course/Course";
-import Search from "./search/Search";
+import { React } from 'react'
+import { useEffect, useState } from 'react';
+import './index.css';
+import Course from './course/Course';
+import Search from './search/Search';
 
 export default function App() {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
+    const [input, setInput] = useState('');
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const initCoursesSet = [
+        {
+            id: 1,
+            name: 'Algorithms',
+            description: 'Course description'
+        },
+        {
+            id: 2,
+            name: 'Ukrainian language',
+            description: 'Course description'
+        },
+        {
+            id: 3,
+            name: 'Algorithms',
+            description: 'Course description'
+        },
+        {
+            id: 4,
+            name: 'Math',
+            description: 'Course description'
+        }
+    ]
 
-  // TODO should have refresh button
-  // TODO should have welcome page without courses
-  // TODO auth page to do firstly
+    // TODO should have refresh button
+    // TODO should have welcome page without courses
+    // TODO auth page to do firstly
 
-  useEffect(() => {
-    setLoading(true);
+    const loadCourses = () => {
+        // fetch('/courses')
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         setCourses(data);
+        //         setLoading(false);
+        //     });
+        setCourses(initCoursesSet)
+    };
 
-    // fetch("/courses")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setCourses(data);
-    //     setLoading(false);
-    //   });
-    setCourses([
-      {
-        'id': 1,
-        'name': 'Algorithms',
-        'description': 'Course description'
-      },
-      {
-        'id': 2,
-        'name': 'Algorithms',
-        'description': 'Course description'
-      },
-      {
-        'id': 3,
-        'name': 'Algorithms',
-        'description': 'Course description'
-      }
-    ]);
-    setLoading(false);
-  }, []);
+    useEffect(() => {
+        setLoading(true);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+        setCourses(initCoursesSet);
+        setLoading(false);
+    }, []);
 
-  return (
-    <div>
-      <header className="header-class"></header>
-      <h1 className="title-name">Hello world!</h1>
-      <Search />
-      <div className="flex-row-container">
-        {courses.map((course) => {
-          return <Course course={course} />;
-        })}
-      </div>
-      <footer className="footer-class"></footer>
-    </div>
-  );
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    // eslint-disable-next-line
+    const filterCourses = () => {
+        console.log(input)
+        if (input === '') {
+            loadCourses();
+            return;
+        }
+        setCourses(courses.filter(course => course.name.includes(input)))
+    };
+
+    return (
+        <div>
+            <header className="header-class"></header>
+            <h1 className="title-name">Hello world!</h1>
+            <Search input={input} setInput={setInput} filterCourses={filterCourses} />
+            <div className="flex-row-container">
+                {courses.map((course) => {
+                    return <Course key={course.id} course={course} />;
+                })}
+            </div>
+            <footer className="footer-class"></footer>
+        </div>
+    );
 }

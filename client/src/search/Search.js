@@ -1,27 +1,24 @@
-import "./index.css"
-import { useState } from "react"
+import { React } from 'react'
+import './index.css';
 
-export default function Search() {
-
-    const [input, setInput] = useState('')
-
+export default function Search({ input, setInput, filterCourses }) {
     const handleInput = (event) => {
-        setInput(event.target.value)
-    }
-
-    const handleSubmit = () => {
-        console.log(input)
-    }
+        setInput(event.target.value);
+    };
 
     return (
         <form className="search-box">
-            <input value={input} type="text" placeholder="Search..."
+            <input
+                value={input}
+                type="text"
+                placeholder="Search..."
                 onChange={handleInput}
             />
-            <button type='button' className='search-button'
-                onClick={handleSubmit}
+            <button
+                type="button"
+                className="search-button"
+                onClick={filterCourses}
             />
         </form>
-    )
-
+    );
 }
