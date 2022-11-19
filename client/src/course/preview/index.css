@@ -30,16 +30,6 @@
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.flex-row-container > .flex-row-item {
-    flex: 1 1 30%; /*grow | shrink | basis */
-}
-
-.flex-row-item {
-    width: 345px;
-    padding: 40px;
-    margin: 20px;
-}
-
 .open-course-button {
     position: relative;
 
@@ -76,6 +66,12 @@
     background-color: #000000;
 }
 
-.course-details-page {
-    height: 84vh;
+.flex-row-container > .flex-row-item {
+    flex: 1 1 30%; /*grow | shrink | basis */
+}
+
+.flex-row-item {
+    width: 345px;
+    padding: 40px;
+    margin: 20px;
 }

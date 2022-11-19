@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import Course from '../course/Course';
+import CoursePreview from '../course/preview/CoursePreview';
 import Search from '../search/Search';
 import './index.css';
 
@@ -74,7 +74,7 @@ const Main = () => {
             />
             <div className="flex-row-container">
                 {courses.map((course) => {
-                    return <Course key={course.id} course={course} />;
+                    return <CoursePreview key={course.id} course={course} />;
                 })}
             </div>
         </div>

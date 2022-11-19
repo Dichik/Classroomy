@@ -1,7 +1,8 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './index.css';
 
-const CourseDetails = () => {
+const Course = () => {
     const params = useParams();
     const [loading, setLoading] = useState(false);
     const [courseDetails, setCourseDatails] = useState(null);
@@ -38,4 +39,4 @@ const CourseDetails = () => {
     );
 };
 
-export default CourseDetails;
+export default Course;

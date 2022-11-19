@@ -2,7 +2,7 @@ import { React } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 
-const Course = ({ course }) => {
+const CoursePreview = ({ course }) => {
     let navigate = useNavigate();
 
     return (
@@ -15,9 +15,8 @@ const Course = ({ course }) => {
             >
                 Open
             </button>
-            {/* <CourseDetails key={course.id} course={course} />  */}
         </div>
     );
 };
 
-export default Course;
+export default CoursePreview;
