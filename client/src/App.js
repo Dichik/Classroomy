@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Course from "./course/Course";
 import Search from "./search/Search";
 
 export default function App() {
-  // eslint-disable-next-line
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,23 @@ export default function App() {
     //     setCourses(data);
     //     setLoading(false);
     //   });
-    setCourses([]);
+    setCourses([
+      {
+        'id': 1,
+        'name': 'Algorithms',
+        'description': 'Course description'
+      },
+      {
+        'id': 2,
+        'name': 'Algorithms',
+        'description': 'Course description'
+      },
+      {
+        'id': 3,
+        'name': 'Algorithms',
+        'description': 'Course description'
+      }
+    ]);
     setLoading(false);
   }, []);
 
@@ -32,16 +48,12 @@ export default function App() {
     <div>
       <header className="header-class"></header>
       <h1 className="title-name">Hello world!</h1>
-      <Search courses={courses} />
-      {courses.map((course) => {
-        return (
-          <div key={course.id}>
-            <h2>name: {course.name}</h2>
-            <h2>country: {course.description}</h2>
-            <hr />
-          </div>
-        );
-      })}
+      <Search />
+      <div className="flex-row-container">
+        {courses.map((course) => {
+          return <Course course={course} />;
+        })}
+      </div>
       <footer className="footer-class"></footer>
     </div>
   );
