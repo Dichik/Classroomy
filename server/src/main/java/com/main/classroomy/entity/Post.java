@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalTime;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -21,13 +21,11 @@ public class Post {
 
     private String title;
 
-    private String text;
-
-    private String attachment; // TODO new class/entity?
-
-    private Long teacherId;
+    private String description;
 
     private Long courseId;
+
+    private Timestamp deadline;
 
 
 }
