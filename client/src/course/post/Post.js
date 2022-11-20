@@ -15,7 +15,7 @@ const Post = ({ post }) => {
                 alt='todo-tick' className='tick-todo-image' 
                 onClick={() => setDone(!done)} 
             />
-            <p>Hello from Post {post.title}!</p>
+            <p className='post-title'>Hello from Post {post.title}!</p>
         </div>
     );
 

@@ -1,5 +1,6 @@
 import { React } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Menu from '../menu/Menu';
 import './index.css';
 
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
             >
                 <p className="header-app-name-title">My Courses</p>
             </button>
+            <Menu />
         </header>
     );
 };

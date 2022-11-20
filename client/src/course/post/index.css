@@ -13,13 +13,21 @@
 
     margin-top: 20px;
     margin-left: 25%;
+}
+
+.post-title {
+    position: fixed;
 
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 20px;
 }
 
 .tick-todo-image {
-    position: fixed;
-    padding-right: 49%;
-    padding-bottom: 6%;
+    position: sticky;
+
+    width: 100px;
+    height: 100px;
+    
+    margin-right: 98%;
+    margin-bottom: 11%;
 }

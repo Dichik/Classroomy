@@ -28,11 +28,7 @@
         "prettier": "npx prettier --write .",
         "prepare": "husky install"
     },
-    "proxy": {
-        "/api/*": {
-            "target": "http://localhost:8000"
-        }
-    },
+    "proxy": "http://localhost:8000",
     "eslintConfig": {
         "extends": [
             "react-app",
