@@ -5,13 +5,12 @@ import com.main.classroomy.entity.Student;
 import com.main.classroomy.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/students")
 public class StudentController {
 
@@ -24,26 +23,28 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getAll() {
-        return List.of();
+        return this.studentService.getAll();
     }
 
     @GetMapping("/{id:[\\d+]}")
-    public ResponseEntity<Student> getById(@PathVariable Long id) {
-        return null;
+    public Student getById(@PathVariable Long id) {
+        return this.studentService.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> create(@Valid @RequestBody StudentDto studentDto) {
-        return null;
+    public void create(@Valid @RequestBody StudentDto studentDto) {
+        this.studentService.create(studentDto);
     }
 
     @DeleteMapping("/{id:[\\d+]}")
     public ResponseEntity<StudentDto> delete(@PathVariable Long id) {
+//        this.studentService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id:[\\d+]}")
     public ResponseEntity<StudentDto> update(@PathVariable Long id) {
+//        this.studentService.updateById(id);
         return ResponseEntity.noContent().build();
     }
 
