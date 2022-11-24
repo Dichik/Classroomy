@@ -4,14 +4,18 @@ import com.main.classroomy.entity.dto.TeacherDto;
 import com.main.classroomy.entity.Teacher;
 import com.main.classroomy.exception.TeacherNotFoundException;
 import com.main.classroomy.repository.TeacherRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class TeacherService {
+    private static final Logger logger = LogManager.getLogger(TeacherService.class);
 
     private final TeacherRepository teacherRepository;
     private final ModelMapper modelMapper;
@@ -26,7 +30,7 @@ public class TeacherService {
         return this.teacherRepository.findAll();
     }
 
-    public Teacher findById(Long id) {
+    public Teacher getById(Long id) {
         return this.teacherRepository.findById(id)
                 .orElseThrow(() -> new TeacherNotFoundException("Teacher with id=" + id + " was not found."));
     }

@@ -4,6 +4,8 @@ import com.main.classroomy.entity.Course;
 import com.main.classroomy.entity.dto.CourseDto;
 import com.main.classroomy.exception.CourseNotFoundException;
 import com.main.classroomy.repository.CourseRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Service
 public class CourseService {
+    private static final Logger logger = LogManager.getLogger(CourseService.class);
 
     private final CourseRepository courseRepository;
     private final ModelMapper modelMapper;

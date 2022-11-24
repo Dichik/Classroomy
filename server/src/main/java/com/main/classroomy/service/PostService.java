@@ -1,9 +1,12 @@
 package com.main.classroomy.service;
 
 import com.main.classroomy.entity.Post;
+import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.exception.PostNotFoundException;
 import com.main.classroomy.repository.PostRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @Service
 public class PostService {
+    private static final Logger logger = LogManager.getLogger(PostService.class);
 
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
@@ -45,4 +49,12 @@ public class PostService {
         return null;
     }
 
+    public void updateById(Long id, AssignmentDto assignmentDto) {
+        Post post = this.postRepository.findById(id).orElse(null);
+        if (post == null) {
+            throw new RuntimeException("Error...");
+        }
+        post.setDeadline(assignmentDto.getDeadline());
+        this.postRepository.save(post);
+    }
 }

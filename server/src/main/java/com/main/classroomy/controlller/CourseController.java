@@ -6,6 +6,8 @@ import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.entity.dto.CourseDto;
 import com.main.classroomy.service.CourseService;
 import com.main.classroomy.service.PostService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
+    private static final Logger logger = LogManager.getLogger(CourseController.class);
 
     private final CourseService courseService;
     private final PostService postService;
