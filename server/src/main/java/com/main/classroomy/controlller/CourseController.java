@@ -1,8 +1,11 @@
 package com.main.classroomy.controlller;
 
 import com.main.classroomy.entity.Course;
+import com.main.classroomy.entity.Post;
+import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.entity.dto.CourseDto;
 import com.main.classroomy.service.CourseService;
+import com.main.classroomy.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +18,16 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
+    private final PostService postService;
+    private final ModelMapper modelMapper;
+
+    private final Long URGENT_PARAM = 7L;
 
     @Autowired
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, PostService postService, ModelMapper modelMapper) {
         this.courseService = courseService;
+        this.postService = postService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -27,8 +36,22 @@ public class CourseController {
     }
 
     @GetMapping("/{id:\\d+}")
-    public Course getById(@PathVariable Long id) {
-        return this.courseService.getById(id);
+    public CourseDto getById(@PathVariable Long id) {
+        Course course = this.courseService.getById(id);
+        if (course == null) {
+            throw new RuntimeException("");
+        }
+        CourseDto courseDto = this.modelMapper.map(course, CourseDto.class);
+        List<Post> posts = this.postService.getByCourseId(id);
+        courseDto.setPosts(posts);
+        return courseDto;
+    }
+
+    @GetMapping("/{id:\\d+}")
+    public List<AssignmentDto> getUrgentDeadlines(@PathVariable Long id) {
+        // TODO research if we can get it from course_id
+        // FIXME add caching mechanism
+        return null;
     }
 
     @PostMapping

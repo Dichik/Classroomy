@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -33,6 +35,14 @@ public class PostService {
         Post post = this.modelMapper.map(postDto, Post.class);
         post.setId(id);
         this.postRepository.save(post);
+    }
+
+    public List<Post> getByCourseId(Long id) {
+        return this.postRepository.findByCourseId(id);
+    }
+
+    public List<Post> getAssignmentsForNextWeek() {
+        return null;
     }
 
 }
