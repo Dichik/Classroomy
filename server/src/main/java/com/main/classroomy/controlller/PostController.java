@@ -1,6 +1,5 @@
 package com.main.classroomy.controlller;
 
-import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.exception.DeadlineUpdateException;
 import com.main.classroomy.service.PostService;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -25,7 +23,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @RolesAllowed("ADMIN")
+//    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeadline(@PathVariable Long id, @Valid @RequestBody AssignmentDto assignmentDto) {
         try {

@@ -6,10 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -35,28 +35,30 @@ public class TeacherController {
 //    }
 
     // TODO encode teacher id - it is a bad practice to use id from DB
-    @RolesAllowed("ADMIN")
+//    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
     public TeacherDto getById(@PathVariable Long id) {
         return this.modelMapper.map(this.teacherService.getById(id), TeacherDto.class);
     }
 
-    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TeacherDto> create(@Valid @RequestBody TeacherDto teacherDto) {
         return null;
     }
 
-    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
     public ResponseEntity<TeacherDto> delete(@PathVariable Long id) {
+        this.teacherService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
-    public ResponseEntity<TeacherDto> update(@PathVariable Long id) {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody TeacherDto teacherDto) {
+        this.teacherService.updateById(id, teacherDto);
+        return ResponseEntity.status(HttpStatus.OK).body("Teacher was updated successfully!");
     }
 
 }

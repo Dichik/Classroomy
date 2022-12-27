@@ -2,7 +2,6 @@ package com.main.classroomy.controlller;
 
 import com.main.classroomy.entity.Course;
 import com.main.classroomy.entity.Post;
-import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.entity.dto.CourseDto;
 import com.main.classroomy.service.CourseService;
 import com.main.classroomy.service.PostService;
@@ -10,9 +9,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -32,49 +33,53 @@ public class CourseController {
         this.modelMapper = modelMapper;
     }
 
-    @RolesAllowed({"USER", "ADMIN"})
+    //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(method = RequestMethod.GET)
     public List<Course> getAll() { // TODO add pageable
         return this.courseService.getAll();
     }
 
-    @RolesAllowed({"USER", "ADMIN"})
+    //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
-    public CourseDto getById(@PathVariable Long id) {
+    public ResponseEntity<CourseDto> getById(@PathVariable Long id) {
         Course course = this.courseService.getById(id);
         if (course == null) {
-            throw new RuntimeException(""); // FIXME exception
+            logger.warn("There is no course with id=" + id);
+            throw new EntityNotFoundException(String.format("Course with id=[%s] was not found.", id));
         }
         CourseDto courseDto = this.modelMapper.map(course, CourseDto.class);
         List<Post> posts = this.postService.getByCourseId(id);
         courseDto.setPosts(posts);
-        return courseDto;
+        return ResponseEntity.ok(courseDto);
     }
 
-    @RolesAllowed({"USER", "ADMIN"})
+    //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}/deadlines", method = RequestMethod.GET)
     public List<AssignmentDto> getUrgentDeadlines(@PathVariable Long id) {
-        // TODO research if we can get it from course_id
-        // FIXME add caching mechanism
-        return null;
+        return this.postService.getAssignmentsForNextWeek(id).stream()
+                .map(course -> modelMapper.map(course, AssignmentDto.class))
+                .toList();
     }
 
-    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
-    public Course create(@Valid @RequestBody CourseDto courseDto) {
-        return this.courseService.create(courseDto);
+    public ResponseEntity<Course> create(@Valid @RequestBody CourseDto courseDto) {
+        return ResponseEntity.ok(this.courseService.create(courseDto));
     }
 
-    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PUT)
-    public void updateById(@PathVariable Long id, @Valid @RequestBody CourseDto courseDto) {
+    public ResponseEntity<?> updateById(@PathVariable Long id, @Valid @RequestBody CourseDto courseDto) {
         this.courseService.updateById(id, courseDto);
+        return ResponseEntity.status(HttpStatus.OK).body("Course was successfully updated!");
     }
 
-    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "{id:\\d+}", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable Long id) {
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
         this.courseService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(String.format("Course with id=[%s] was successfully deleted!", id));
     }
 
 }

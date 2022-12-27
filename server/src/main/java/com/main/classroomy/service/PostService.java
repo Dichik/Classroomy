@@ -1,7 +1,6 @@
 package com.main.classroomy.service;
 
 import com.main.classroomy.entity.Post;
-import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.exception.DeadlineUpdateException;
 import com.main.classroomy.exception.PostNotFoundException;
@@ -49,10 +48,10 @@ public class PostService {
         return this.postRepository.findByCourseId(id);
     }
 
-    public List<Post> getAssignmentsForNextWeek() {
+    public List<Post> getAssignmentsForNextWeek(Long id) {
         LocalDateTime nowPlusWeek = LocalDateTime.now();
         nowPlusWeek.plus(1, ChronoUnit.WEEKS);
-        return this.postRepository.findByDeadlineBefore(Timestamp.valueOf(nowPlusWeek));
+        return this.postRepository.findByCourseIdAndDeadlineBefore(id, Timestamp.valueOf(nowPlusWeek));
     }
 
     public void updateById(Long id, AssignmentDto assignmentDto) throws DeadlineUpdateException {

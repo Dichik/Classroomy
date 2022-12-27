@@ -53,9 +53,8 @@ public class StudentController {
 
     @RolesAllowed("USER")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
-    public ResponseEntity<StudentDto> update(@PathVariable Long id) {
-//        this.studentService.updateById(id);
-        // TODO implement method
+    public ResponseEntity<StudentDto> update(@PathVariable Long id, @Valid @RequestBody StudentDto studentDto) {
+        this.studentService.updateById(id, studentDto);
         // FIXME user can't update email field
         return ResponseEntity.noContent().build();
     }

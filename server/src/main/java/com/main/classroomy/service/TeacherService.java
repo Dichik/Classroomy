@@ -1,14 +1,12 @@
 package com.main.classroomy.service;
 
-import com.main.classroomy.entity.dto.TeacherDto;
 import com.main.classroomy.entity.Teacher;
+import com.main.classroomy.entity.dto.TeacherDto;
 import com.main.classroomy.exception.TeacherNotFoundException;
 import com.main.classroomy.repository.TeacherRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TeacherService {
@@ -22,13 +20,9 @@ public class TeacherService {
         this.modelMapper = modelMapper;
     }
 
-    public List<Teacher> getAll() {
-        return this.teacherRepository.findAll();
-    }
-
     public Teacher getById(Long id) {
         return this.teacherRepository.findById(id)
-                .orElseThrow(() -> new TeacherNotFoundException("Teacher with id=" + id + " was not found."));
+                .orElseThrow(() -> new TeacherNotFoundException(String.format("Teacher with id=%s was not found.", id)));
     }
 
     public Teacher create(TeacherDto teacherDto) {
@@ -39,6 +33,15 @@ public class TeacherService {
 
     public void deleteById(Long id) {
         this.teacherRepository.deleteById(id);
+    }
+
+    public void updateById(Long id, TeacherDto teacherDto) {
+        if (!this.teacherRepository.existsById(id)) {
+            throw new TeacherNotFoundException(String.format("Teacher with id=%s was not found.", id));
+        }
+        Teacher teacher = this.modelMapper.map(teacherDto, Teacher.class);
+        teacher.setId(id);
+        this.teacherRepository.save(teacher);
     }
 
 }

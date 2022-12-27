@@ -45,12 +45,20 @@ public class StudentService {
         );
     }
 
-    public void updateByEmail(String email, StudentDto studentDto) {
-        // TODO implement this method after Spring Security part
+    public void updateById(Long id, StudentDto studentDto) {
+        if (!this.studentRepository.existsById(id)) {
+            throw new StudentNotFoundException(String.format("Student with id=%s was not found!", id));
+        }
+        Student student = this.modelMapper.map(studentDto, Student.class);
+        student.setId(id);
+        this.studentRepository.save(student);
     }
 
-    public void deleteByEmail(String email) {
-        // TODO implement method after Spring Security enhancement
+    public void deleteById(Long id) {
+        if (!this.studentRepository.existsById(id)) {
+            throw new StudentNotFoundException(String.format("Student with id=%s was not found!", id));
+        }
+        this.studentRepository.deleteById(id);
     }
 
 }
