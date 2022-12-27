@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/teachers")
@@ -27,28 +26,34 @@ public class TeacherController {
         this.modelMapper = modelMapper;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<TeacherDto> getAll() {
-        return this.teacherService.getAll().stream()
-                .map(teacher -> this.modelMapper.map(teacher, TeacherDto.class))
-                .collect(Collectors.toList());
-    }
-// TODO encode teacher id - it is a bad practice to use id from DB
-@RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
+//    @RolesAllowed("ADMIN")
+//    @RequestMapping(method = RequestMethod.GET)
+//    public List<TeacherDto> getAll() {
+//        return this.teacherService.getAll().stream()
+//                .map(teacher -> this.modelMapper.map(teacher, TeacherDto.class))
+//                .collect(Collectors.toList());
+//    }
+
+    // TODO encode teacher id - it is a bad practice to use id from DB
+    @RolesAllowed("ADMIN")
+    @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
     public TeacherDto getById(@PathVariable Long id) {
         return this.modelMapper.map(this.teacherService.getById(id), TeacherDto.class);
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TeacherDto> create(@Valid @RequestBody TeacherDto teacherDto) {
         return null;
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
     public ResponseEntity<TeacherDto> delete(@PathVariable Long id) {
         return ResponseEntity.noContent().build();
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
     public ResponseEntity<TeacherDto> update(@PathVariable Long id) {
         return ResponseEntity.noContent().build();

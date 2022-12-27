@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -24,6 +25,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeadline(@PathVariable Long id, @Valid @RequestBody AssignmentDto assignmentDto) {
         try {

@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,11 +32,13 @@ public class CourseController {
         this.modelMapper = modelMapper;
     }
 
+    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(method = RequestMethod.GET)
     public List<Course> getAll() { // TODO add pageable
         return this.courseService.getAll();
     }
 
+    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
     public CourseDto getById(@PathVariable Long id) {
         Course course = this.courseService.getById(id);
@@ -48,6 +51,7 @@ public class CourseController {
         return courseDto;
     }
 
+    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}/deadlines", method = RequestMethod.GET)
     public List<AssignmentDto> getUrgentDeadlines(@PathVariable Long id) {
         // TODO research if we can get it from course_id
@@ -55,16 +59,19 @@ public class CourseController {
         return null;
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public Course create(@Valid @RequestBody CourseDto courseDto) {
         return this.courseService.create(courseDto);
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PUT)
     public void updateById(@PathVariable Long id, @Valid @RequestBody CourseDto courseDto) {
         this.courseService.updateById(id, courseDto);
     }
 
+    @RolesAllowed("ADMIN")
     @RequestMapping(value = "{id:\\d+}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable Long id) {
         this.courseService.deleteById(id);
