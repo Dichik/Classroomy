@@ -3,6 +3,7 @@ package com.main.classroomy.controlller;
 import com.main.classroomy.entity.Course;
 import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.CourseDto;
+import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.service.CourseService;
 import com.main.classroomy.service.PostService;
 import org.apache.logging.log4j.LogManager;
@@ -55,9 +56,9 @@ public class CourseController {
 
     //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}/deadlines", method = RequestMethod.GET)
-    public List<AssignmentDto> getUrgentDeadlines(@PathVariable Long id) {
+    public List<PostDto> getUrgentDeadlines(@PathVariable Long id) {
         return this.postService.getAssignmentsForNextWeek(id).stream()
-                .map(course -> modelMapper.map(course, AssignmentDto.class))
+                .map(post -> modelMapper.map(post, PostDto.class))
                 .toList();
     }
 

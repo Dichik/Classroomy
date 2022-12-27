@@ -1,5 +1,6 @@
 package com.main.classroomy.controlller;
 
+import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.exception.DeadlineUpdateException;
 import com.main.classroomy.service.PostService;
 import org.apache.logging.log4j.LogManager;
@@ -23,11 +24,11 @@ public class PostController {
         this.postService = postService;
     }
 
-//    @RolesAllowed("ADMIN")
+    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateDeadline(@PathVariable Long id, @Valid @RequestBody AssignmentDto assignmentDto) {
+    public ResponseEntity<?> updateDeadline(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         try {
-            this.postService.updateById(id, assignmentDto);
+            this.postService.updateById(id, postDto);
             return ResponseEntity.status(HttpStatus.OK).body("Deadline was updated!");
         } catch (DeadlineUpdateException e) {
             logger.warn("Error while update deadline, please see: " + e);
