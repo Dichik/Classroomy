@@ -40,7 +40,7 @@ public class CourseController {
     public CourseDto getById(@PathVariable Long id) {
         Course course = this.courseService.getById(id);
         if (course == null) {
-            throw new RuntimeException(""); // FIXME
+            throw new RuntimeException(""); // FIXME exception
         }
         CourseDto courseDto = this.modelMapper.map(course, CourseDto.class);
         List<Post> posts = this.postService.getByCourseId(id);

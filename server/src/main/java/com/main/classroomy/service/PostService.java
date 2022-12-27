@@ -46,13 +46,13 @@ public class PostService {
     }
 
     public List<Post> getAssignmentsForNextWeek() {
-        return null;
+        return null; // TODO implement method
     }
 
     public void updateById(Long id, AssignmentDto assignmentDto) {
         Post post = this.postRepository.findById(id).orElse(null);
         if (post == null) {
-            throw new RuntimeException("Error...");
+            throw new RuntimeException("Error..."); // FIXME
         }
         post.setDeadline(assignmentDto.getDeadline());
         this.postRepository.save(post);
