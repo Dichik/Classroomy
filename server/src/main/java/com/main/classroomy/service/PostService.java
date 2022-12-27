@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -48,7 +51,9 @@ public class PostService {
     }
 
     public List<Post> getAssignmentsForNextWeek() {
-        return null; // TODO implement method
+        LocalDateTime nowPlusWeek = LocalDateTime.now();
+        nowPlusWeek.plus(1, ChronoUnit.WEEKS);
+        return this.postRepository.findByDeadlineBefore(Timestamp.valueOf(nowPlusWeek));
     }
 
     public void updateById(Long id, AssignmentDto assignmentDto) throws DeadlineUpdateException {
@@ -63,4 +68,5 @@ public class PostService {
         post.setDeadline(assignmentDto.getDeadline());
         this.postRepository.save(post);
     }
+    
 }
