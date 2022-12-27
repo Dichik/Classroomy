@@ -3,6 +3,7 @@ package com.main.classroomy.service;
 import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.entity.dto.PostDto;
+import com.main.classroomy.exception.DeadlineUpdateException;
 import com.main.classroomy.exception.PostNotFoundException;
 import com.main.classroomy.repository.PostRepository;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -49,10 +51,14 @@ public class PostService {
         return null; // TODO implement method
     }
 
-    public void updateById(Long id, AssignmentDto assignmentDto) {
+    public void updateById(Long id, AssignmentDto assignmentDto) throws DeadlineUpdateException {
         Post post = this.postRepository.findById(id).orElse(null);
         if (post == null) {
-            throw new RuntimeException("Error..."); // FIXME
+            throw new PostNotFoundException(String.format("Post with id=[%s] can't be found.", id));
+        }
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        if (assignmentDto.getDeadline().compareTo(now) <= 0) {
+            throw new DeadlineUpdateException("Deadline can't be updated as you are trying to set past date.");
         }
         post.setDeadline(assignmentDto.getDeadline());
         this.postRepository.save(post);
