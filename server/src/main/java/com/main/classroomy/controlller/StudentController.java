@@ -1,7 +1,7 @@
 package com.main.classroomy.controlller;
 
-import com.main.classroomy.entity.dto.StudentDto;
 import com.main.classroomy.entity.Student;
+import com.main.classroomy.entity.dto.StudentDto;
 import com.main.classroomy.service.StudentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,28 +24,28 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public List<Student> getAll() {
         return this.studentService.getAll();
     }
 
-    @GetMapping("/{id:[\\d+]}")
+    @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
     public Student getById(@PathVariable Long id) {
         return this.studentService.getById(id);
     }
 
-    @PostMapping
+    @RequestMapping(method = RequestMethod.POST)
     public void create(@Valid @RequestBody StudentDto studentDto) {
         this.studentService.create(studentDto);
     }
 
-    @DeleteMapping("/{id:[\\d+]}")
+    @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
     public ResponseEntity<StudentDto> delete(@PathVariable Long id) {
 //        this.studentService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id:[\\d+]}")
+    @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
     public ResponseEntity<StudentDto> update(@PathVariable Long id) {
 //        this.studentService.updateById(id);
         return ResponseEntity.noContent().build();

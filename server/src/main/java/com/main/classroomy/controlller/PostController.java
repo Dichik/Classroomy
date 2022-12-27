@@ -1,15 +1,11 @@
 package com.main.classroomy.controlller;
 
-import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.AssignmentDto;
 import com.main.classroomy.service.PostService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,8 +21,8 @@ public class PostController {
         this.postService = postService;
     }
 
-    @PatchMapping("/{id:\\d+}")
-    public void updateDeadline(@PathVariable Long id, @Valid AssignmentDto assignmentDto) {
+    @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)
+    public void updateDeadline(@PathVariable Long id, @Valid @RequestBody AssignmentDto assignmentDto) {
         this.postService.updateById(id, assignmentDto);
     }
 

@@ -24,8 +24,6 @@ public class CourseController {
     private final PostService postService;
     private final ModelMapper modelMapper;
 
-    private final Long URGENT_PARAM = 7L;
-
     @Autowired
     public CourseController(CourseService courseService, PostService postService, ModelMapper modelMapper) {
         this.courseService = courseService;
@@ -33,16 +31,16 @@ public class CourseController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public List<Course> getAll() { // TODO add pageable
         return this.courseService.getAll();
     }
 
-    @GetMapping("/{id:\\d+}")
+    @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
     public CourseDto getById(@PathVariable Long id) {
         Course course = this.courseService.getById(id);
         if (course == null) {
-            throw new RuntimeException("");
+            throw new RuntimeException(""); // FIXME
         }
         CourseDto courseDto = this.modelMapper.map(course, CourseDto.class);
         List<Post> posts = this.postService.getByCourseId(id);
@@ -50,24 +48,24 @@ public class CourseController {
         return courseDto;
     }
 
-    @GetMapping("/{id:\\d+}")
+    @RequestMapping(value = "/{id:\\d+}/deadlines", method = RequestMethod.GET)
     public List<AssignmentDto> getUrgentDeadlines(@PathVariable Long id) {
         // TODO research if we can get it from course_id
         // FIXME add caching mechanism
         return null;
     }
 
-    @PostMapping
-    public Course create(@Valid CourseDto courseDto) {
+    @RequestMapping(method = RequestMethod.POST)
+    public Course create(@Valid @RequestBody CourseDto courseDto) {
         return this.courseService.create(courseDto);
     }
 
-    @PutMapping("/{id:\\d+}")
+    @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PUT)
     public void updateById(@PathVariable Long id, @Valid @RequestBody CourseDto courseDto) {
         this.courseService.updateById(id, courseDto);
     }
 
-    @DeleteMapping("{id:\\d+}")
+    @RequestMapping(value = "{id:\\d+}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable Long id) {
         this.courseService.deleteById(id);
     }
