@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -20,24 +20,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/teachers/**").hasRole("ADMIN")
-                .antMatchers("/posts/**").hasRole("ADMIN")
-                .antMatchers("/students/{\\d+}").access("hasRole('USER') or hasRole('ADMIN')")
-                .antMatchers("/students").hasRole("ADMIN")
-                .antMatchers("/courses/**").access("hasRole('USER') or hasRole('ADMIN')")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin();
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/teachers/**").hasRole("ADMIN")
+//                .antMatchers("/posts/**").hasRole("ADMIN")
+//                .antMatchers("/students/{\\d+}").access("hasRole('USER') or hasRole('ADMIN')")
+//                .antMatchers("/students").hasRole("ADMIN")
+////                .antMatchers("/courses/**").access("hasRole('USER') or hasRole('ADMIN')")
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder().encode("password")).roles("ADMIN");
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+//                .and()
+//                .withUser("admin").password(passwordEncoder().encode("password")).roles("ADMIN");
     }
 
 }
