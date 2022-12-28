@@ -1,6 +1,8 @@
 package com.main.classroomy.controlller;
 
+import com.main.classroomy.entity.Teacher;
 import com.main.classroomy.entity.dto.TeacherDto;
+import com.main.classroomy.exception.TeacherNotFoundException;
 import com.main.classroomy.service.TeacherService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,39 +28,33 @@ public class TeacherController {
         this.modelMapper = modelMapper;
     }
 
-//    @RolesAllowed("ADMIN")
-//    @RequestMapping(method = RequestMethod.GET)
-//    public List<TeacherDto> getAll() {
-//        return this.teacherService.getAll().stream()
-//                .map(teacher -> this.modelMapper.map(teacher, TeacherDto.class))
-//                .collect(Collectors.toList());
-//    }
-
-    // TODO encode teacher id - it is a bad practice to use id from DB
-//    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
-    public TeacherDto getById(@PathVariable Long id) {
-        return this.modelMapper.map(this.teacherService.getById(id), TeacherDto.class);
+    public ResponseEntity<TeacherDto> getById(@PathVariable Long id) {
+        Teacher teacher = this.teacherService.getById(id)
+                .orElseThrow(() -> new TeacherNotFoundException(String.format("Teacher with id=%s was not found.", id)));
+        return new ResponseEntity<>(this.modelMapper.map(teacher, TeacherDto.class), HttpStatus.OK);
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TeacherDto> create(@Valid @RequestBody TeacherDto teacherDto) {
-        return null;
+        Teacher teacher = this.teacherService.create(teacherDto);
+        if (teacher == null) {
+            logger.warn("Something went wrong, couldn't create teacher...");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(this.modelMapper.map(teacher, TeacherDto.class), HttpStatus.CREATED);
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
-    public ResponseEntity<TeacherDto> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         this.teacherService.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>("Teacher was successfully deleted!", HttpStatus.NO_CONTENT);
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody TeacherDto teacherDto) {
-        this.teacherService.updateById(id, teacherDto);
-        return ResponseEntity.status(HttpStatus.OK).body("Teacher was updated successfully!");
+    public ResponseEntity<TeacherDto> update(@PathVariable Long id, @Valid @RequestBody TeacherDto teacherDto) {
+        Teacher teacher = this.teacherService.updateById(id, teacherDto);
+        return new ResponseEntity<>(this.modelMapper.map(teacher, TeacherDto.class), HttpStatus.OK);
     }
 
 }

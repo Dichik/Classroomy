@@ -1,5 +1,6 @@
 package com.main.classroomy.entity.dto;
 
+import com.main.classroomy.entity.Course;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -9,7 +10,8 @@ public class PostDto {
 
     private String title;
     private String description;
-    private Long courseId;
+    private Course course;
     private Timestamp deadline;
+    private boolean isDone;
 
 }

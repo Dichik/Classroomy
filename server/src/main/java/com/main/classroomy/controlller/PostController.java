@@ -24,15 +24,14 @@ public class PostController {
         this.postService = postService;
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeadline(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         try {
             this.postService.updateById(id, postDto);
-            return ResponseEntity.status(HttpStatus.OK).body("Deadline was updated!");
+            return new ResponseEntity<>("Deadline was updated!", HttpStatus.OK);
         } catch (DeadlineUpdateException e) {
             logger.warn("Error while update deadline, please see: " + e);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Deadline was not updated.");
+            return new ResponseEntity<>("Deadline was not updated.", HttpStatus.NOT_FOUND);
         }
     }
 

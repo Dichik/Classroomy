@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseService {
@@ -26,9 +27,8 @@ public class CourseService {
         return this.courseRepository.findAll();
     }
 
-    public Course getById(Long id) {
-        return this.courseRepository.findById(id)
-                .orElseThrow(() -> new CourseNotFoundException("Course with id=" + id + " was not found!"));
+    public Optional<Course> getById(Long id) {
+        return this.courseRepository.findById(id);
     }
 
     public Course create(CourseDto courseDto) {

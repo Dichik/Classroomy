@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:classroomy-server
+    url: jdbc:h2:file:classroomy-server
     username: sa
     password: password
     driverClassName: org.h2.Driver

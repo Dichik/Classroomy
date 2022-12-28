@@ -1,15 +1,18 @@
 package com.main.classroomy.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "courses")
@@ -25,5 +28,9 @@ public class Course {
 
     @Size(max = 255)
     private String description;
+
+    @OneToMany
+    @JoinColumn(columnDefinition = "post_id")
+    private List<Post> posts;
 
 }

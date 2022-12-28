@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -29,29 +30,25 @@ public class StudentService {
         return this.studentRepository.findAll();
     }
 
-    public Student getById(Long id) {
-        return this.studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException("Student with id=" + id + " was not found!"));
+    public Optional<Student> getById(Long id) {
+        return this.studentRepository.findById(id);
     }
 
-    public Student getByEmail(String email) {
-        return this.studentRepository.findByEmail(email)
-                .orElseThrow(() -> new StudentNotFoundException("Student with email=" + email + " was not found!"));
+    public Optional<Student> getByEmail(String email) {
+        return this.studentRepository.findByEmail(email);
     }
 
-    public void create(StudentDto studentDto) {
-        this.studentRepository.save(
-                this.modelMapper.map(studentDto, Student.class)
-        );
+    public Student create(StudentDto studentDto) {
+        return this.studentRepository.save(this.modelMapper.map(studentDto, Student.class));
     }
 
-    public void updateById(Long id, StudentDto studentDto) {
+    public Student updateById(Long id, StudentDto studentDto) {
         if (!this.studentRepository.existsById(id)) {
             throw new StudentNotFoundException(String.format("Student with id=%s was not found!", id));
         }
         Student student = this.modelMapper.map(studentDto, Student.class);
         student.setId(id);
-        this.studentRepository.save(student);
+        return this.studentRepository.save(student);
     }
 
     public void deleteById(Long id) {

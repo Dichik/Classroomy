@@ -1,8 +1,12 @@
 package com.main.classroomy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +15,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "posts")
@@ -28,12 +33,15 @@ public class Post {
     @Size(max = 255)
     private String description;
 
-    //    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinTable(name = "post_course",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Long courseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Course course;
 
     private Timestamp deadline;
+
+    @Builder.Default
+    private boolean isDone = false;
 
 }

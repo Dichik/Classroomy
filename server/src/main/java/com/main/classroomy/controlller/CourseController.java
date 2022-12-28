@@ -1,7 +1,6 @@
 package com.main.classroomy.controlller;
 
 import com.main.classroomy.entity.Course;
-import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.CourseDto;
 import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.service.CourseService;
@@ -34,53 +33,54 @@ public class CourseController {
         this.modelMapper = modelMapper;
     }
 
-    //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(method = RequestMethod.GET)
-    public List<Course> getAll() { // TODO add pageable
-        return this.courseService.getAll();
+    public ResponseEntity<List<Course>> getAll() { // TODO add pageable
+        List<Course> courses = this.courseService.getAll();
+        if (courses.isEmpty()) {
+            logger.info("List of courses is empty!");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
-    //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
     public ResponseEntity<CourseDto> getById(@PathVariable Long id) {
-        Course course = this.courseService.getById(id);
-        if (course == null) {
-            logger.warn("There is no course with id=" + id);
-            throw new EntityNotFoundException(String.format("Course with id=[%s] was not found.", id));
-        }
+        Course course = this.courseService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Course with id=" + id + " was not found!"));
+
         CourseDto courseDto = this.modelMapper.map(course, CourseDto.class);
-        List<Post> posts = this.postService.getByCourseId(id);
-        courseDto.setPosts(posts);
-        return ResponseEntity.ok(courseDto);
+        return new ResponseEntity<>(courseDto, HttpStatus.OK);
     }
 
-    //    @RolesAllowed({"USER", "ADMIN"})
     @RequestMapping(value = "/{id:\\d+}/deadlines", method = RequestMethod.GET)
-    public List<PostDto> getUrgentDeadlines(@PathVariable Long id) {
-        return this.postService.getAssignmentsForNextWeek(id).stream()
+    public ResponseEntity<List<PostDto>> getUrgentDeadlines(@PathVariable Long id) {
+        List<PostDto> posts = this.postService.getAssignmentsForNextWeek(id).stream()
                 .map(post -> modelMapper.map(post, PostDto.class))
                 .toList();
+        if (posts.isEmpty()) {
+            logger.info("List of posts is empty!");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Course> create(@Valid @RequestBody CourseDto courseDto) {
-        return ResponseEntity.ok(this.courseService.create(courseDto));
+        return new ResponseEntity<>(this.courseService.create(courseDto), HttpStatus.CREATED);
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateById(@PathVariable Long id, @Valid @RequestBody CourseDto courseDto) {
         this.courseService.updateById(id, courseDto);
-        return ResponseEntity.status(HttpStatus.OK).body("Course was successfully updated!");
+        return new ResponseEntity<>("Course was successfully updated!", HttpStatus.OK);
     }
 
-    //    @RolesAllowed("ADMIN")
     @RequestMapping(value = "{id:\\d+}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         this.courseService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(String.format("Course with id=[%s] was successfully deleted!", id));
+
+        String message = String.format("Course with id=[%s] was successfully deleted!", id);
+        return new ResponseEntity<>(message, HttpStatus.NO_CONTENT);
     }
 
 }
