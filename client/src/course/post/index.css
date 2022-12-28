@@ -5,11 +5,9 @@
 }
 
 .post-box {
-    position: relative;
-
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
 
     width: 50%;
     height: 85px;
@@ -22,17 +20,14 @@
 }
 
 .post-title {
-    position: fixed;
-
     font-size: 20px;
+    margin-left: 5%;
 }
 
-.tick-todo-image {
-    position: sticky;
+.post-title{
+    flex: 6;
+}
 
-    width: 100px;
-    height: 100px;
-
-    margin-right: 98%;
-    margin-bottom: 11%;
+.post-box {
+    flex: 1;
 }

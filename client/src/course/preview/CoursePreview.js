@@ -6,7 +6,7 @@ const CoursePreview = ({ course }) => {
     let navigate = useNavigate();
 
     return (
-        <div key={course.id} className="course-box flex-row-item">
+        <div key={course.id} className="course-box">
             <h2 className="course-title">{course.name}</h2>
             <button
                 type="button"

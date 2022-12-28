@@ -1,22 +1,20 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import './index.css';
-import todoTick from '../../images/tick-grey-icon.png';
-import doneTick from '../../images/tick-green-icon.png';
 
 const Post = ({ post }) => {
-    const [done, setDone] = useState(false);
 
     // TODO save done to prevent refresh data loose
 
+    const markPostAsChecked = () => {
+        post.done = !post.done;
+    }
+
     return (
         <div className="post-box">
-            <img
-                src={done ? doneTick : todoTick}
-                alt="todo-tick"
-                className="tick-todo-image"
-                onClick={() => setDone(!done)}
-            />
             <p className="post-title">Hello from Post {post.title}!</p>
+            <input className='post-checkbox' type="checkbox" id={post.id} 
+                name="done" value={post.done} 
+                onClick={markPostAsChecked} />
         </div>
     );
 };

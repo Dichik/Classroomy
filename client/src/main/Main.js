@@ -72,7 +72,7 @@ const Main = () => {
                 setInput={setInput}
                 filterCourses={filterCourses}
             />
-            <div className="flex-row-container">
+            <div className='container'>
                 {courses.map((course) => {
                     return <CoursePreview key={course.id} course={course} />;
                 })}
