@@ -1,11 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica;
+}
+
 .course-box {
     position: relative;
 
     width: 300px;
     height: 200px;
 
-    background: #d5fff7;
-    border: 1px solid #27ffd6;
+    /* background: #d5fff7; */
+    background: rgba(221, 221, 221, 0.364);
+    border: 1px solid #555;
     border-radius: 15px;
 }
 
@@ -19,7 +26,6 @@
     width: 100%;
     height: 49px;
 
-    font-family: 'Trebuchet MS', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 22px;
@@ -27,7 +33,7 @@
 
     color: #000000;
 
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 
 .open-course-button {
@@ -40,7 +46,6 @@
     width: 100%;
     height: 40px;
 
-    font-family: 'Trebuchet MS', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 22px;
@@ -53,7 +58,7 @@
     box-sizing: border-box;
 
     background: #ffffff;
-    border: 1px solid #27ffd6;
+    border: 1px solid #555;
     border-radius: 15px;
 
     margin-top: 100px;
@@ -62,7 +67,7 @@
 }
 
 .open-course-button:hover {
-    color: #27ffd6;
+    color: #ddd;
     background-color: #000000;
 }
 

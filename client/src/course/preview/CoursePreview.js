@@ -13,7 +13,7 @@ const CoursePreview = ({ course }) => {
                 className="open-course-button"
                 onClick={() => navigate(`/courses/${course.id}`)}
             >
-                Open
+                open
             </button>
         </div>
     );

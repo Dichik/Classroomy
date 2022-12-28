@@ -11,7 +11,7 @@ const Search = ({ input, setInput, filterCourses }) => {
             <input
                 value={input}
                 type="text"
-                placeholder="Search..."
+                placeholder="search..."
                 onChange={handleInput}
             />
             <button

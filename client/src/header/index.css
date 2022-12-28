@@ -1,55 +1,41 @@
-.header-app-box {
-    position: relative;
-
-    width: 120px;
-    height: 40px;
-
-    background: #ffffff;
-    border-radius: 15px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica;
 }
 
-.header-app-name {
-    top: 10px;
-    left: 5%;
+header li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 20px;
 }
 
-.header-app-name-title {
-    position: relative;
 
+header {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-
-    font-family: 'Trebuchet MS', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 40px;
-
-    color: #000000;
+    padding: 20px 50px;
+    box-shadow: 0 1px 8px #ddd;
 }
 
-.header-app-name-title:hover {
-    color: var(--main-color);
+#nav-title {
+    margin-right: auto;
+    font-size: 1.5em;
 }
 
-.header-app-my-courses {
-    float: right;
-    margin-right: 15%;
-    margin-top: -2%;
-
-    transition-duration: 0.4s;
+header li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 20px;
 }
 
-.header-app-box:hover {
-    background-color: black;
+header a {
+    text-decoration: none;
+    color: #555;
+    transition: all 0.3s ease 0s;
 }
 
-.header-class {
-    position: relative;
-
-    width: 100%;
-    height: 60px;
-    background-color: var(--main-color);
+header a:hover {
+    color: #b2dfdb;
 }

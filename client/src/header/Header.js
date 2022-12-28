@@ -1,24 +1,29 @@
 import { React } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Menu from '../menu/Menu';
+import { Link } from 'react-router-dom';
 import './index.css';
 
 const Header = () => {
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
 
     return (
-        <header className="header-class">
-            <div className="header-app-box header-app-name">
-                <p className="header-app-name-title">Classroomy</p>
-            </div>
-            <button
-                type="button"
-                className="header-app-box header-app-my-courses"
-                onClick={() => navigate('/')}
-            >
-                <p className="header-app-name-title">My Courses</p>
-            </button>
-            <Menu />
+        <header>
+            <h1 id="nav-title">classroomy</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">my courses</Link>
+                    </li>
+                    <li>
+                        <a href="#">homeworks</a>
+                    </li>
+                    <li>
+                        <a href="#">profile</a>
+                    </li>
+                    <li>
+                        <a href="#">logout</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
     );
 };

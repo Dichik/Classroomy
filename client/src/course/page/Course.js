@@ -12,8 +12,8 @@ const Course = () => {
 
     const initCourseDetails = {
         id: params.id,
-        name: 'course.name',
-        description: 'course.description'
+        name: 'algorithms',
+        description: 'learn algorithms and become a better developer!'
     };
 
     useEffect(() => {
@@ -30,16 +30,16 @@ const Course = () => {
         console.log(courseDetails);
         setPosts([
             {
-                "id": 1,
-                "title": "title1",
-                "description": "description1"
+                id: 1,
+                title: 'title1',
+                description: 'description1'
             },
             {
-                "id": 2,
-                "title": "title2",
-                "description": "description2"
+                id: 2,
+                title: 'title2',
+                description: 'description2'
             }
-        ])
+        ]);
         setLoading(false);
     }, []);
 
@@ -49,9 +49,9 @@ const Course = () => {
 
     return (
         <div className="course-details-page">
-            <h2 className='course-details-title'>{initCourseDetails.name}</h2>
-            {posts.map(post => {
-                return <Post key={post.id} post={post}/>
+            <h2 className="course-details-title">{initCourseDetails.name}</h2>
+            {posts.map((post) => {
+                return <Post key={post.id} post={post} />;
             })}
         </div>
     );

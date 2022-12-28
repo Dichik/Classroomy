@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica;
+}
+
 .post-box {
     position: relative;
 
@@ -8,7 +14,7 @@
     width: 50%;
     height: 85px;
 
-    background: #D5FFF7;
+    background: rgba(221, 221, 221, 0.364);
     border-radius: 15px;
 
     margin-top: 20px;
@@ -18,7 +24,6 @@
 .post-title {
     position: fixed;
 
-    font-family: 'Trebuchet MS', sans-serif;
     font-size: 20px;
 }
 
@@ -27,7 +32,7 @@
 
     width: 100px;
     height: 100px;
-    
+
     margin-right: 98%;
     margin-bottom: 11%;
 }
