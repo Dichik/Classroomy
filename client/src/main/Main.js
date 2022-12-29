@@ -7,47 +7,23 @@ const Main = () => {
     const [input, setInput] = useState('');
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(false);
-    const initCoursesSet = [
-        {
-            id: 1,
-            name: 'Algorithms',
-            description: 'Course description'
-        },
-        {
-            id: 2,
-            name: 'Ukrainian language',
-            description: 'Course description'
-        },
-        {
-            id: 3,
-            name: 'Algorithms',
-            description: 'Course description'
-        },
-        {
-            id: 4,
-            name: 'Math',
-            description: 'Course description'
-        }
-    ];
 
     // TODO should have refresh button
     // TODO should have welcome page without courses
     // TODO auth page to do firstly
 
     const loadCourses = () => {
-        // fetch('/courses')
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         setCourses(data);
-        //         setLoading(false);
-        //     });
-        setCourses(initCoursesSet);
+        fetch('/courses')
+            .then((response) => response.json())
+            .then((data) => {
+                setCourses(data);
+                setLoading(false);
+            });
     };
 
     useEffect(() => {
         setLoading(true);
-
-        setCourses(initCoursesSet);
+        loadCourses();
         setLoading(false);
     }, []);
 

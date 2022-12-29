@@ -39,3 +39,8 @@ header a {
 header a:hover {
     color: #b2dfdb;
 }
+
+.title-link {
+    color: #555;
+    text-decoration: none;
+}

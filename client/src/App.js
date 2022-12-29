@@ -2,6 +2,7 @@ import { React } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Course from './course/page/Course';
 import Header from './header/Header';
+import Home from './home/Home';
 import Main from './main/Main';
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
             <Router>
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Main />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/courses" element={<Main />}></Route>
                     <Route exect path="/courses/:id" element={<Course />} />
                 </Routes>
             </Router>

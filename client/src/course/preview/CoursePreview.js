@@ -1,20 +1,20 @@
 import { React } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './index.css';
 
 const CoursePreview = ({ course }) => {
-    let navigate = useNavigate();
 
     return (
         <div key={course.id} className="course-box">
             <h2 className="course-title">{course.name}</h2>
-            <button
+            <Link id='course.id' className='open-course-button' state={{course: course}} to={`/courses/${course.id}`} >Open</Link>
+            {/* <button
                 type="button"
                 className="open-course-button"
-                onClick={() => navigate(`/courses/${course.id}`)}
+                onClick={() => navigate(, course)}
             >
                 open
-            </button>
+            </button> */}
         </div>
     );
 };

@@ -1,49 +1,30 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Post from '../post/Post';
 import './index.css';
 
 const Course = () => {
-    const params = useParams();
 
     const [loading, setLoading] = useState(false);
-    const [courseDetails, setCourseDatails] = useState(null);
     const [posts, setPosts] = useState([]);
+    const location = useLocation();
+    const [course, setCourse] = useState(null);
 
-    const initCourseDetails = {
-        id: params.id,
-        name: 'algorithms',
-        description: 'learn algorithms and become a better developer!'
+    const loadPosts = () => {
+        // console.log(`http://localhost:8080/courses/${location.state.course.id}/posts`);
+        fetch(`http://localhost:8080/courses/${location.state.course.id}/posts`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setCourse(location.state.course);
+                setPosts(data);
+                setLoading(false);
+            });
     };
-
-    const initPosts = [
-        {
-            id: 1,
-            title: 'title1',
-            description: 'description1',
-            done: false
-        },
-        {
-            id: 2,
-            title: 'title2',
-            description: 'description2',
-            done: true
-        }
-    ];
 
     useEffect(() => {
         setLoading(true);
-
-        // fetch('/courses/{course.id}')
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         setCourses(data);
-        //         setLoading(false);
-        //     });
-        console.log(params.id);
-        setCourseDatails(initCourseDetails);
-        console.log(courseDetails);
-        setPosts(initPosts);
+        loadPosts();
         setLoading(false);
     }, []);
 
@@ -54,18 +35,17 @@ const Course = () => {
     const doSomething = (e) => {
         let chosenOption = e.target.value;
         console.log(chosenOption);
-        for (let i = 0; i < posts.length; i++ ) {
-            if (posts[i].done == true) {
-                initPosts[i] = true;
-            }
-        }
+        console.log(course);
+        // for (let i = 0; i < posts.length; i++ ) {
+        //     if (posts[i].done == true) {
+        //     }
+        // }
     }
-
 
     return (
         <div className="col course-details-page">
             <div className="sub-header">
-                <h2 className="course-details-title">{initCourseDetails.name}</h2>
+                <h2 className="course-details-title">Name</h2>
                 <div className="course-actions">
                     <label id="actions">choose an action: </label>
 
@@ -75,9 +55,9 @@ const Course = () => {
                     </select>
                 </div>
             </div>
-            {posts.map((post) => {
+            {posts.length !== 0 ? posts.map((post) => {
                 return <Post key={post.id} post={post} />;
-            })}
+            }) : <h2 className='no-posts-title'>There are no posts for this course!</h2>}
         </div>
     );
 };

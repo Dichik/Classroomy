@@ -7,11 +7,11 @@ const Header = () => {
 
     return (
         <header>
-            <h1 id="nav-title">classroomy</h1>
+            <h1 id="nav-title"><Link className='title-link' to={"/"}>classroomy</Link></h1>
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">my courses</Link>
+                        <Link to="/courses">my courses</Link>
                     </li>
                     <li>
                         <a href="#">homeworks</a>
