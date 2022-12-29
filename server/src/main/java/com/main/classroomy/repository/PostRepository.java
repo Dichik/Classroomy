@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findByCourseId(Long id);
+    List<Post> findByCourseId(Long courseId);
 
     List<Post> findByCourseIdAndDeadlineBefore(Long courseId, Timestamp deadline);
 

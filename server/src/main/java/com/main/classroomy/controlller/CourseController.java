@@ -1,6 +1,7 @@
 package com.main.classroomy.controlller;
 
 import com.main.classroomy.entity.Course;
+import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.CourseDto;
 import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.service.CourseService;
@@ -75,12 +76,22 @@ public class CourseController {
         return new ResponseEntity<>("Course was successfully updated!", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "{id:\\d+}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         this.courseService.deleteById(id);
 
         String message = String.format("Course with id=[%s] was successfully deleted!", id);
         return new ResponseEntity<>(message, HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/{id:\\d+}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> getPostsByCourseId(@PathVariable Long id) {
+        List<Post> posts = this.postService.getByCourseId(id);
+        if (posts.isEmpty()) {
+            logger.info("No posts found for course with id=" + id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 }
