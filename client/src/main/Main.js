@@ -13,7 +13,7 @@ const Main = () => {
     // TODO auth page to do firstly
 
     const loadCourses = () => {
-        fetch('/courses')
+        fetch('http://localhost:8080/courses')
             .then((response) => response.json())
             .then((data) => {
                 setCourses(data);

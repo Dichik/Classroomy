@@ -1,5 +1,6 @@
 package com.main.classroomy.controlller;
 
+import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.exception.DeadlineUpdateException;
 import com.main.classroomy.service.PostService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -33,6 +35,11 @@ public class PostController {
             logger.warn("Error while update deadline, please see: " + e);
             return new ResponseEntity<>("Deadline was not updated.", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<List<Post>> updatePosts(@RequestBody List<Post> posts) {
+        return new ResponseEntity<>(this.postService.updatePosts(posts), HttpStatus.OK);
     }
 
 }

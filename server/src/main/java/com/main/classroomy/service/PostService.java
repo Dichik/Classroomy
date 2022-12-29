@@ -64,4 +64,8 @@ public class PostService {
         this.postRepository.save(post);
     }
 
+    public List<Post> updatePosts(List<Post> posts) {
+        return this.postRepository.saveAll(posts);
+    }
+
 }
