@@ -2,7 +2,7 @@ import { React } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-const PostPreview = ({ post }) => {
+export default function PostPreview({ post }) {
 
     return (
         <div className="post-box">
@@ -19,6 +19,4 @@ const PostPreview = ({ post }) => {
             </button>
         </div>
     );
-};
-
-export default PostPreview;
+}

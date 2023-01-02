@@ -35,14 +35,14 @@ public class PostDataLoader implements ApplicationRunner {
         List<Course> courses = this.courseRepository.findAll();
         Random random = new Random();
         List<Post> posts = new ArrayList<>();
-        for (int i = 0; i < 10; ++ i) {
+        for (int i = 0; i < 10; ++i) {
             Post post = Post.builder()
                     .title("assignment " + i)
                     .description("to do task " + i)
-                    .course(courses.get(random.nextInt(courses.size())))
+                    .courseId(random.nextLong(courses.size()))
                     .build();
             posts.add(post);
-            logger.info("post was added to course with name=" + post.getCourse().getName());
+            logger.info("post was added to course with id=" + post.getCourseId());
         }
         this.postRepository.saveAll(posts);
     }

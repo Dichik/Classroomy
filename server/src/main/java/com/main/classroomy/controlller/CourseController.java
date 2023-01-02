@@ -65,6 +65,7 @@ public class CourseController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Course> create(@Valid @RequestBody CourseDto courseDto) {
         return new ResponseEntity<>(this.courseService.create(courseDto), HttpStatus.CREATED);

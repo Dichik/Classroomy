@@ -23,7 +23,7 @@ public class CourseDataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         List<Course> courses = new ArrayList<>();
-        for (int i = 0; i < 10; ++ i) {
+        for (int i = 0; i < 10; ++i) {
             Course course = Course.builder()
                     .name("course" + i)
                     .description("here we learn how to use " + i)

@@ -31,8 +31,8 @@ public class PostService {
                 .orElseThrow(() -> new PostNotFoundException("Post with id=" + id + " was not found!"));
     }
 
-    public void create(Post post) {
-        this.postRepository.save(post);
+    public Post create(Post post) {
+        return this.postRepository.save(post);
     }
 
     public Post update(Long id, Post post) {
