@@ -9,7 +9,6 @@ const Main = () => {
     const [loading, setLoading] = useState(false);
 
     // TODO should have refresh button
-    // TODO should have welcome page without courses
     // TODO auth page to do firstly
 
     const loadCourses = () => {

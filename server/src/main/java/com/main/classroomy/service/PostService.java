@@ -35,10 +35,9 @@ public class PostService {
         this.postRepository.save(post);
     }
 
-    public void update(Long id, PostDto postDto) {
-        Post post = this.modelMapper.map(postDto, Post.class);
+    public Post update(Long id, Post post) {
         post.setId(id);
-        this.postRepository.save(post);
+        return this.postRepository.save(post);
     }
 
     public List<Post> getByCourseId(Long id) {

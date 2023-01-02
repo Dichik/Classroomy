@@ -1,16 +1,20 @@
-import { React } from 'react';
-import './index.css';
+import {React} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
 
-const Post = ({ post, markPostAsChecked }) => {
+
+export default function Post() {
+    const {id} = useParams();
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(-1);
+    }
 
     return (
-        <div className="post-box">
-            <p className="post-title">{post.title}!</p>
-            <input className='post-checkbox' type="checkbox" id={post.id} 
-                name="done" value={post.done} defaultValue={post.done}
-                onClick={() => markPostAsChecked(post.id)} />
+        <div>
+            <h1>hello from Miao, {id}</h1>
+            <button onClick={handleClick}>back</button>
         </div>
     );
-};
 
-export default Post;
+}

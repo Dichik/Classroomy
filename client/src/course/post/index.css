@@ -31,3 +31,22 @@
 .post-box {
     flex: 1;
 }
+
+.post-button {
+    flex: 1;
+
+    width: auto;
+    height: 30px;
+
+    margin: 20px;
+    text-decoration: none;
+}
+
+.link-button {
+    width: auto;
+    height: auto;
+
+    text-decoration: none;
+
+    color: #555;
+}

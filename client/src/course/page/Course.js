@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Post from '../post/Post';
+import PostPreview from '../post/PostPreview';
 import './index.css';
 
-const Course = () => {
+export default function Course() {
 
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -30,47 +30,44 @@ const Course = () => {
         return <div>Loading...</div>;
     }
 
-    const doSomething = () => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(posts)
-        };
+    // const doSomething = () => {
+    //     const requestOptions = {
+    //         method: 'PUT',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(posts)
+    //     };
 
-        fetch(`http://localhost:8080/posts`, requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                setPosts(data);
-                setLoading(false);
-            });
-    }
-
-    const markPostAsChecked = (id) => {
-        for (let i = 0; i < posts.length; i ++ ) {
-            if (posts[i].id === id) {
-                posts[i].done = !posts[i].done;
-            }
-        }
-    }
+    //     fetch(`http://localhost:8080/posts`, requestOptions)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setPosts(data);
+    //             setLoading(false);
+    //         });
+    // }
 
     return (
-        <div className="col course-details-page">
+        <div className="course-details-page">
             <div className="sub-header">
-                <h2 className="course-details-title">{course === null || course.name !== null ? course.name : 'loading course name...'}</h2>
-                <div className="course-actions">
+                <h2 className="course-details-title">{
+                    course === null || course.name !== null ? course.name : 'loading course name...'
+                }</h2>
+                {/* <div className="course-actions">
                     <label id="actions">choose an action: </label>
 
                     <select name="actions" id="actions" onChange={doSomething}>
                         <option value="no-action" defaultChecked>no action</option>
                         <option value="mark-as-done">mark as done</option>
                     </select>
-                </div>
+                </div> */}
+            </div>
+            <div>
+                <input id='title' name='title' className='title-input' type='text' />
+                <input id='description' name='description' className='description-input' type='text' />
+                <button className='submit-post-button'>create post</button>
             </div>
             {posts.length !== 0 ? posts.map((post) => {
-                return <Post key={post.id} post={post} markPostAsChecked={markPostAsChecked} />;
+                return <PostPreview key={post.id} post={post} />;
             }) : <h2 className='no-posts-title'>There are no posts for this course!</h2>}
         </div>
     );
-};
-
-export default Course;
+}

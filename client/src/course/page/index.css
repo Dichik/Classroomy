@@ -11,21 +11,19 @@
 .course-details-title {
     flex: 5;
 
-    width: 300px;
-    height: 100px;
-    margin-left: 10%;
-    font-weight: 600;
-
-    font-style: normal;
-    font-size: 30px;
-    line-height: 36px;
     display: flex;
     align-items: center;
     text-align: center;
 
-    color: #000000;
+    width: 300px;
+    height: 100px;
+    margin-left: 10%;
 
-    /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    font-weight: 600;
+    font-style: normal;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
 }
 
 .sub-header {
@@ -42,4 +40,20 @@
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+.title-input {
+    border: 3px solid #bbb;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+
+.description-input {
+    border: 3px solid #bbb;
+}
+
+.submit-post-button {
+
 }
