@@ -1,11 +1,8 @@
 package com.main.classroomy.controlller;
 
 import com.main.classroomy.entity.Course;
-import com.main.classroomy.entity.Post;
 import com.main.classroomy.entity.dto.CourseDto;
-import com.main.classroomy.entity.dto.PostDto;
 import com.main.classroomy.service.CourseService;
-import com.main.classroomy.service.PostService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;

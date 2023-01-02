@@ -61,7 +61,6 @@ public class PostController {
         return new ResponseEntity<>(this.postService.update(id, post), HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/deadlines", method = RequestMethod.GET)
     public ResponseEntity<?> getDeadlinesForCourseId(@RequestParam Long courseId, @RequestParam(required = false, defaultValue = "false") boolean urgent) {
         List<PostDto> posts;
