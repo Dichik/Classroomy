@@ -1,7 +1,7 @@
 import { React } from 'react';
 import './index.css';
 
-const Search = ({ input, setInput, filterCourses }) => {
+export default function Search({ input, setInput, filterCourses }) {
     const handleInput = (event) => {
         setInput(event.target.value);
     };
@@ -21,6 +21,4 @@ const Search = ({ input, setInput, filterCourses }) => {
             />
         </form>
     );
-};
-
-export default Search;
+}

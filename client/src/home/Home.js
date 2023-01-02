@@ -2,7 +2,7 @@ import { React } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-const Home = () => {
+export default function Home () {
 
     return (
         <div>
@@ -11,6 +11,4 @@ const Home = () => {
             <Link to={"/courses"}>see my courses</Link>
         </div>
     );
-};
-
-export default Home;
+}

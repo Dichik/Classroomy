@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PostPreview from '../post/PostPreview';
 import './index.css';
 
 export default function Course() {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); {/* TODO add spinner */}
     const [posts, setPosts] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -13,12 +13,12 @@ export default function Course() {
 
     const location = useLocation();
     const course = location.state.course;
+    const navigate = useNavigate();
 
     const loadPosts = () => {
         fetch(`http://localhost:8080/courses/${location.state.course.id}/posts`)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setPosts(data);
                 setLoading(false);
             });
@@ -33,21 +33,6 @@ export default function Course() {
     if (loading) {
         return <div>Loading...</div>;
     }
-
-    // const doSomething = () => {
-    //     const requestOptions = {
-    //         method: 'PUT',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(posts)
-    //     };
-
-    //     fetch(`http://localhost:8080/posts`, requestOptions)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setPosts(data);
-    //             setLoading(false);
-    //         });
-    // }
 
     const handlePostSubmit = async () => {
         setLoading(true);
@@ -81,9 +66,13 @@ export default function Course() {
         }
     }
 
+    const handleBackClick = () => {
+        navigate(-1);
+    }
+
     return (
         <div>
-            {err && <h2>{err}</h2>}
+            {err && <h2>{err}</h2>} {/* TODO add popup window with the error */}
             <div className="course-details-page">
                 <div className="sub-header">
                     <h2 className="course-details-title">{
@@ -97,6 +86,9 @@ export default function Course() {
                             <option value="mark-as-done">mark as done</option>
                         </select>
                     </div> */}
+                    <div>
+                        <button onClick={handleBackClick}>back</button>
+                    </div>
                 </div>
                 <div>
                     <input id='title' name='title' 

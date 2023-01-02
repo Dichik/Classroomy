@@ -6,7 +6,7 @@ import Header from './header/Header';
 import Home from './home/Home';
 import Main from './main/Main';
 
-const App = () => {
+export default function App() {
     return (
         <div>
             <Router>
@@ -20,6 +20,4 @@ const App = () => {
             </Router>
         </div>
     );
-};
-
-export default App;
+}

@@ -3,7 +3,7 @@ import CoursePreview from '../course/preview/CoursePreview';
 import Search from '../search/Search';
 import './index.css';
 
-const Main = () => {
+export default function Main() {
     const [input, setInput] = useState('');
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -54,6 +54,4 @@ const Main = () => {
             </div>
         </div>
     );
-};
-
-export default Main;
+}
