@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 @RestController
@@ -33,6 +34,13 @@ public class PostController {
     public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto) {
         Post post = this.modelMapper.map(postDto, Post.class);
         return new ResponseEntity<>(this.postService.create(post), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        Post post = this.postService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Post with id=" + id + " was not found!"));
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)

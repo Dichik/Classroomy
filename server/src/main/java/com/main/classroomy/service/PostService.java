@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -26,9 +27,8 @@ public class PostService {
         this.modelMapper = modelMapper;
     }
 
-    public Post getById(Long id) {
-        return this.postRepository.findById(id)
-                .orElseThrow(() -> new PostNotFoundException("Post with id=" + id + " was not found!"));
+    public Optional<Post> getById(Long id) {
+        return this.postRepository.findById(id);
     }
 
     public Post create(Post post) {

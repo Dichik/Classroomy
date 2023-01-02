@@ -50,3 +50,12 @@
 
     color: #555;
 }
+
+.student-answer-field {
+    border: 3px solid #bbb;
+}
+
+.submit-button {
+    width: 100px;
+    height: 50px;
+}

@@ -23,7 +23,6 @@ export default function Main() {
     useEffect(() => {
         setLoading(true);
         loadCourses();
-        setLoading(false);
     }, []);
 
     if (loading) {

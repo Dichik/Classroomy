@@ -15,7 +15,7 @@ export default function Course() {
     const course = location.state.course;
     const navigate = useNavigate();
 
-    const loadPosts = () => {
+    const getAllPosts = () => {
         fetch(`http://localhost:8080/courses/${location.state.course.id}/posts`)
             .then((response) => response.json())
             .then((data) => {
@@ -26,7 +26,7 @@ export default function Course() {
 
     useEffect(() => {
         setLoading(true);
-        loadPosts();
+        getAllPosts();
         setLoading(false);
     }, []);
 
@@ -51,7 +51,6 @@ export default function Course() {
         };
         try {
             const response = await fetch(`http://localhost:8080/posts`, requestOptions);
-            console.log(response);
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
