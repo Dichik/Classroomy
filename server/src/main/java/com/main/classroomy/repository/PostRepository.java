@@ -14,4 +14,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByCourseIdAndDeadlineBefore(Long courseId, Timestamp deadline);
 
+    List<Post> findAllByCourseIdAndDeadlineNotNull(Long courseId);
+
 }

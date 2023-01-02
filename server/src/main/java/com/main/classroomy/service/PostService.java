@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,4 +68,7 @@ public class PostService {
         return this.postRepository.saveAll(posts);
     }
 
+    public List<Post> getAssignmentsWithDeadlines(Long courseId) {
+        return this.postRepository.findAllByCourseIdAndDeadlineNotNull(courseId);
+    }
 }

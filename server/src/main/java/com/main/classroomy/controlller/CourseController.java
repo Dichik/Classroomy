@@ -24,13 +24,11 @@ public class CourseController {
     private static final Logger logger = LogManager.getLogger(CourseController.class);
 
     private final CourseService courseService;
-    private final PostService postService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public CourseController(CourseService courseService, PostService postService, ModelMapper modelMapper) {
+    public CourseController(CourseService courseService, ModelMapper modelMapper) {
         this.courseService = courseService;
-        this.postService = postService;
         this.modelMapper = modelMapper;
     }
 
@@ -53,18 +51,6 @@ public class CourseController {
         return new ResponseEntity<>(courseDto, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id:\\d+}/deadlines", method = RequestMethod.GET)
-    public ResponseEntity<List<PostDto>> getUrgentDeadlines(@PathVariable Long id) {
-        List<PostDto> posts = this.postService.getAssignmentsForNextWeek(id).stream()
-                .map(post -> modelMapper.map(post, PostDto.class))
-                .toList();
-        if (posts.isEmpty()) {
-            logger.info("List of posts is empty!");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }
-
     @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Course> create(@Valid @RequestBody CourseDto courseDto) {
@@ -83,16 +69,6 @@ public class CourseController {
 
         String message = String.format("Course with id=[%s] was successfully deleted!", id);
         return new ResponseEntity<>(message, HttpStatus.NO_CONTENT);
-    }
-
-    @RequestMapping(value = "/{id:\\d+}/posts", method = RequestMethod.GET)
-    public ResponseEntity<List<Post>> getPostsByCourseId(@PathVariable Long id) {
-        List<Post> posts = this.postService.getByCourseId(id);
-        if (posts.isEmpty()) {
-            logger.info("No posts found for course with id=" + id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 }

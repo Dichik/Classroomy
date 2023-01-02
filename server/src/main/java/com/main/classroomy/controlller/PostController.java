@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -58,6 +59,35 @@ public class PostController {
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         Post post = this.modelMapper.map(postDto, Post.class);
         return new ResponseEntity<>(this.postService.update(id, post), HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/deadlines", method = RequestMethod.GET)
+    public ResponseEntity<?> getDeadlinesForCourseId(@RequestParam Long courseId, @RequestParam(required = false, defaultValue = "false") boolean urgent) {
+        List<PostDto> posts;
+        if (!urgent) {
+            posts = this.postService.getAssignmentsWithDeadlines(courseId).stream()
+                    .map(post -> modelMapper.map(post, PostDto.class))
+                    .toList();
+        } else {
+            posts = this.postService.getAssignmentsForNextWeek(courseId).stream()
+                    .map(post -> modelMapper.map(post, PostDto.class))
+                    .toList();
+        }
+        if (posts.isEmpty()) {
+            return new ResponseEntity<>("List of posts is empty!", HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"courseId"})
+    public ResponseEntity<List<Post>> getPostsByCourseId(@RequestParam Long courseId) {
+        List<Post> posts = this.postService.getByCourseId(courseId);
+        if (posts.isEmpty()) {
+            logger.info("No posts found for course with id=" + courseId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 }
