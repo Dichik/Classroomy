@@ -59,9 +59,13 @@ export default function Post() {
                             back to course
                         </button>
                     </div>
+
+                    <h3><b>what to do:</b></h3>
                     <div className="sub-header-description">
                         <h2>{post.description}</h2>
                     </div>
+
+                    <h3><b>your answer:</b></h3>
                     <form id="create-course" className="form-style">
                         <input
                             id="answer"
