@@ -92,16 +92,22 @@ export default function Course() {
                             <option value="mark-as-done">mark as done</option>
                         </select>
                     </div> */}
-                    <div>
-                        <button onClick={handleBackClick}>back</button>
+                    <div className="course-details-back-button">
+                        <button
+                            className="cdb-button-style"
+                            onClick={handleBackClick}
+                        >
+                            back
+                        </button>
                     </div>
                 </div>
-                <div>
+                <form id="course-create" className="course-create">
                     <input
                         id="title"
                         name="title"
                         className="title-input"
                         type="text"
+                        placeholder="title"
                         onChange={(e) => setTitle(e.target.value)}
                     />
                     <input
@@ -109,6 +115,7 @@ export default function Course() {
                         name="description"
                         className="description-input"
                         type="text"
+                        placeholder="description"
                         onChange={(e) => setDescription(e.target.value)}
                     />
                     <button
@@ -117,7 +124,7 @@ export default function Course() {
                     >
                         create post
                     </button>
-                </div>
+                </form>
                 {posts.length !== 0 ? (
                     posts.map((post) => {
                         return <PostPreview key={post.id} post={post} />;

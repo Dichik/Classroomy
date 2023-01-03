@@ -54,6 +54,19 @@ input[type='text']:focus {
     border: 3px solid #bbb;
 }
 
-/* .submit-post-button {
+.course-create {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 25%;
+    margin-right: 25%;
+}
 
-} */
+.course-details-back-button {
+    flex: 1.5;
+}
+
+.cdb-button-style {
+    width: 100px;
+    height: 50px;
+}

@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Spinner from '../../spinner/Spinner';
 import './index.css';
 
 export default function Post() {
@@ -8,6 +9,7 @@ export default function Post() {
 
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({ title: '', description: '' });
+    const [answer, setAnswer] = useState('');
     const [err, setErr] = useState('');
 
     const handleClick = () => {
@@ -32,7 +34,7 @@ export default function Post() {
     };
 
     const handleSubmit = () => {
-        console.log('assignment was submitted!');
+        console.log('assignment was submitted!', answer);
     };
 
     useEffect(() => {
@@ -41,7 +43,7 @@ export default function Post() {
     }, []);
 
     if (loading) {
-        return <h1>Loading...</h1>;
+        return <Spinner />;
     }
 
     return (
@@ -49,15 +51,27 @@ export default function Post() {
             {err && <h2>{err}</h2>}
             {!err && (
                 <div>
-                    <h1>{post.title}</h1>
-                    <div>
+                    <div className="sub-header-title">
+                        <div className="sht-title">
+                            <h1>{post.title}</h1>
+                        </div>
+                        <button className="sht-button" onClick={handleClick}>
+                            back to course
+                        </button>
+                    </div>
+                    <div className="sub-header-description">
                         <h2>{post.description}</h2>
                     </div>
-                    <input className="student-answer-field" type="text"></input>
-                    <button className="submit-button" onClick={handleSubmit}>
-                        submit
-                    </button>
-                    <button onClick={handleClick}>back to course</button>
+                    <form id="create-course" className="form-style">
+                        <input
+                            id="answer"
+                            className="student-answer-field"
+                            type="text"
+                            placeholder="enter your response"
+                            onChange={(e) => setAnswer(e.target.value)}
+                        />
+                        <button onClick={handleSubmit}>submit</button>
+                    </form>
                 </div>
             )}
         </div>

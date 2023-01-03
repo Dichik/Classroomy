@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../spinner/Spinner';
 
 export default function CreateCourse() {
@@ -6,6 +7,8 @@ export default function CreateCourse() {
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -39,6 +42,10 @@ export default function CreateCourse() {
         }
     };
 
+    const handleBackClick = () => {
+        navigate(-1);
+    };
+
     return (
         <div>
             {loading ? (
@@ -47,15 +54,18 @@ export default function CreateCourse() {
                 <div>
                     {err && <h2>{err}</h2>}
                     <h1>lets create course</h1>
-                    <form>
+                    <button onClick={handleBackClick}>back</button>
+                    <form id="create-course" className="form-style">
                         <input
                             id="name"
+                            className="input-border"
                             type="text"
                             placeholder="name"
                             onChange={(e) => setName(e.target.value)}
                         />
                         <input
                             id="description"
+                            className="input-border"
                             type="text"
                             placeholder="description"
                             onChange={(e) => setDescription(e.target.value)}
