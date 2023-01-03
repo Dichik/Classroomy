@@ -1,16 +1,35 @@
 * {
-    /* need that lines to remove white browser border */
     margin: 0;
     padding: 0;
-}
-
-:root {
-    --main-color: #d4fff7;
+    font-family: Arial, Helvetica;
 }
 
 .title-name {
-    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-size: 30px;
+}
+
+.div-button {
+    position: absolute;
+    right: 0;
+    top: 100px;
+}
+
+.add-course-button {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+    line-height: 45px;
+
+    height: 50px;
+    width: 100px;
+
+    text-decoration: none;
+    color: black;
+
+    background-color: #ddd;
 }

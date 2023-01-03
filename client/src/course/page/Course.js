@@ -6,9 +6,6 @@ import './index.css';
 
 export default function Course() {
     const [loading, setLoading] = useState(false);
-    {
-        /* TODO add spinner */
-    }
     const [posts, setPosts] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');

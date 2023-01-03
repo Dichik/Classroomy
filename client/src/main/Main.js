@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import CoursePreview from '../course/preview/CoursePreview';
 import Search from '../search/Search';
 import Spinner from '../spinner/Spinner';
@@ -42,6 +43,11 @@ export default function Main() {
 
     return (
         <div>
+            <div className="div-button">
+                <Link className="add-course-button" to="/courses/create">
+                    create course
+                </Link>
+            </div>
             <Search
                 input={input}
                 setInput={setInput}

@@ -1,5 +1,5 @@
-import {React} from 'react';
-import { Audio } from 'react-loader-spinner'
+import { React } from 'react';
+import { Audio } from 'react-loader-spinner';
 import styled from 'styled-components';
 
 export default function Spinner() {
