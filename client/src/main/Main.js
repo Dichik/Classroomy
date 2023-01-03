@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import CoursePreview from '../course/preview/CoursePreview';
 import Search from '../search/Search';
+import Spinner from '../spinner/Spinner';
 import './index.css';
 
 export default function Main() {
@@ -26,7 +27,7 @@ export default function Main() {
     }, []);
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <Spinner />;
     }
 
     // eslint-disable-next-line
@@ -46,7 +47,7 @@ export default function Main() {
                 setInput={setInput}
                 filterCourses={filterCourses}
             />
-            <div className='container'>
+            <div className="container">
                 {courses.map((course) => {
                     return <CoursePreview key={course.id} course={course} />;
                 })}

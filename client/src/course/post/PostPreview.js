@@ -9,9 +9,12 @@ export default function PostPreview({ post }) {
             {/* <input className='post-checkbox' type="checkbox" id={post.id} 
                 name="done" value={post.done} defaultValue={post.done}
                 onClick={() => markPostAsChecked(post)} /> */}
-            <button className='post-button'>
-                <Link id={post.id} className='link-button' 
-                    to={window.location.pathname + `/posts/${post.id}`}>
+            <button className="post-button">
+                <Link
+                    id={post.id}
+                    className="link-button"
+                    to={window.location.pathname + `/posts/${post.id}`}
+                >
                     open
                 </Link>
             </button>

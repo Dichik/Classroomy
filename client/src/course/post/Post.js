@@ -1,19 +1,18 @@
-import {React, useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import { React, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import './index.css';
 
-
 export default function Post() {
-    const {id} = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
-    const [post, setPost] = useState({'title': '', 'description': ''});
+    const [post, setPost] = useState({ title: '', description: '' });
     const [err, setErr] = useState('');
 
     const handleClick = () => {
         navigate(-1);
-    }
+    };
 
     const getPostById = async (id) => {
         try {
@@ -30,34 +29,37 @@ export default function Post() {
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     const handleSubmit = () => {
         console.log('assignment was submitted!');
-    }
+    };
 
     useEffect(() => {
         setLoading(true);
         getPostById(id);
-    }, [])
+    }, []);
 
     if (loading) {
-        return <h1>Loading...</h1>
+        return <h1>Loading...</h1>;
     }
 
     return (
         <div>
             {err && <h2>{err}</h2>}
-            {!err && <div>
-                <h1>{post.title}</h1>
+            {!err && (
                 <div>
-                    <h2>{post.description}</h2>
+                    <h1>{post.title}</h1>
+                    <div>
+                        <h2>{post.description}</h2>
+                    </div>
+                    <input className="student-answer-field" type="text"></input>
+                    <button className="submit-button" onClick={handleSubmit}>
+                        submit
+                    </button>
+                    <button onClick={handleClick}>back to course</button>
                 </div>
-                <input className='student-answer-field' type='text'></input>
-                <button className='submit-button' onClick={handleSubmit}>submit</button>
-                <button onClick={handleClick}>back to course</button>
-            </div>}
+            )}
         </div>
     );
-
 }

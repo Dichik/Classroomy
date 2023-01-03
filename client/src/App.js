@@ -15,7 +15,11 @@ export default function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/courses" element={<Main />}></Route>
                     <Route exect path="/courses/:id" element={<Course />} />
-                    <Route exect path="/courses/:id/posts/:id" element={<Post />} />
+                    <Route
+                        exect
+                        path="/courses/:id/posts/:id"
+                        element={<Post />}
+                    />
                 </Routes>
             </Router>
         </div>
