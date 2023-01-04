@@ -122,7 +122,7 @@ export default function Deadline() {
     }
 
     return (
-        <div className='deadlines-table'>
+        <div className="deadlines-table">
             <Styles>
                 <Table columns={columns} data={posts} />
             </Styles>
