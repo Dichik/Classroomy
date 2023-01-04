@@ -62,6 +62,12 @@ public class PostController {
     }
 
     @RequestMapping(value = "/deadlines", method = RequestMethod.GET)
+    public ResponseEntity<?> getDeadlines() {
+        List<Post> posts = this.postService.getAssignmentsForNextWeek();
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/deadlines", method = RequestMethod.GET, params = {"courseId"})
     public ResponseEntity<?> getDeadlinesForCourseId(@RequestParam Long courseId, @RequestParam(required = false, defaultValue = "false") boolean urgent) {
         List<PostDto> posts;
         if (!urgent) {

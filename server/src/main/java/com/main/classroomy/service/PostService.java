@@ -9,7 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -45,9 +47,15 @@ public class PostService {
     }
 
     public List<Post> getAssignmentsForNextWeek(Long id) {
-        LocalDateTime nowPlusWeek = LocalDateTime.now();
-        nowPlusWeek.plus(1, ChronoUnit.WEEKS);
-        return this.postRepository.findByCourseIdAndDeadlineBefore(id, Timestamp.valueOf(nowPlusWeek));
+        LocalDate nowPlusWeek = LocalDate.now();
+        nowPlusWeek = nowPlusWeek.plus(1, ChronoUnit.WEEKS);
+        return this.postRepository.findByCourseIdAndDeadlineBefore(id, Date.valueOf(nowPlusWeek));
+    }
+
+    public List<Post> getAssignmentsForNextWeek() {
+        LocalDate nowPlusWeek = LocalDate.now();
+        nowPlusWeek = nowPlusWeek.plus(1, ChronoUnit.WEEKS);
+        return this.postRepository.findByDeadlineBefore(Date.valueOf(nowPlusWeek)); // TODO get course name as well in query
     }
 
     public void updateById(Long id, PostDto postDto) throws DeadlineUpdateException {

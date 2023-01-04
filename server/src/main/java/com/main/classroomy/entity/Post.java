@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -32,7 +32,7 @@ public class Post {
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     private Long courseId;
 
-    private Timestamp deadline;
+    private Date deadline;
 
     @Builder.Default
     private boolean isDone = false;
