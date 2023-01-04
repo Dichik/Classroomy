@@ -12,5 +12,6 @@ public class PostDto {
     private Long courseId;
     private Date deadline;
     private boolean isDone;
+    private String answer;
 
 }

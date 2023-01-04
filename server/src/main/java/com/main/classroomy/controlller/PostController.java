@@ -55,10 +55,10 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PATCH)
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
-        Post post = this.modelMapper.map(postDto, Post.class);
-        return new ResponseEntity<>(this.postService.update(id, post), HttpStatus.OK);
+        return new ResponseEntity<>(this.postService.update(id, postDto), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/deadlines", method = RequestMethod.GET)

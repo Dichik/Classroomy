@@ -25,6 +25,7 @@ export default function Post() {
 
             const data = await response.json();
             setPost(data);
+            setAnswer(data.answer);
             console.log('post is ', data);
         } catch (err) {
             setErr(err.message);
@@ -33,8 +34,33 @@ export default function Post() {
         }
     };
 
-    const handleSubmit = () => {
-        console.log('assignment was submitted!', answer);
+    const handleSubmit = async () => {
+        const body = {
+            answer: answer
+        }
+        const requestOptions = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify(body)
+        }
+        try {
+            const response = await fetch(`http://localhost:8080/posts/${id}`, requestOptions);
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setPost(data);
+            setAnswer(data.answer);
+            console.log('post is ', data);
+        } catch (err) {
+            setErr(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -82,6 +108,7 @@ export default function Post() {
                             className="student-answer-field"
                             type="text"
                             placeholder="enter your response"
+                            value={answer}
                             onChange={(e) => setAnswer(e.target.value)}
                         />
                         <button onClick={handleSubmit}>submit</button>

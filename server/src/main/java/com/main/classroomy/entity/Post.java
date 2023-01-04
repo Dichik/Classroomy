@@ -37,4 +37,7 @@ public class Post {
     @Builder.Default
     private boolean isDone = false;
 
+    @Size(max = 255)
+    private String answer; // FIXME create new table for that
+
 }

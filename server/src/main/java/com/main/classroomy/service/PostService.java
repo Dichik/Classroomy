@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -37,8 +38,12 @@ public class PostService {
         return this.postRepository.save(post);
     }
 
-    public Post update(Long id, Post post) {
-        post.setId(id);
+    public Post update(Long id, PostDto postDto) {
+        Post post = this.postRepository.findById(id).orElse(null);
+        if (post == null) {
+            throw new EntityNotFoundException("Post with id=" + id + " was not found.");
+        }
+        post.setAnswer(postDto.getAnswer());
         return this.postRepository.save(post);
     }
 
