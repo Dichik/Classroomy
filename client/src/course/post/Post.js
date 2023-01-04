@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../spinner/Spinner';
 import './index.css';
+import http from '../../http-common';
 
 export default function Post() {
     const { id } = useParams();
@@ -18,7 +19,7 @@ export default function Post() {
 
     const getPostById = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8080/posts/${id}`);
+            const response = await http.get(`/posts/${id}`);
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
@@ -66,6 +67,7 @@ export default function Post() {
     useEffect(() => {
         setLoading(true);
         getPostById(id);
+        setLoading(false);
     }, []);
 
     if (loading) {
