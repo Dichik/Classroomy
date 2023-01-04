@@ -54,18 +54,28 @@ export default function Post() {
                     <div className="sub-header-title">
                         <div className="sht-title">
                             <h1>{post.title}</h1>
+                            <p>
+                                deadline:{' '}
+                                {post.deadline
+                                    ? post.deadline.substring(0, 10)
+                                    : 'No deadline'}
+                            </p>
                         </div>
                         <button className="sht-button" onClick={handleClick}>
                             back to course
                         </button>
                     </div>
 
-                    <h3><b>what to do:</b></h3>
+                    <h3>
+                        <b>what to do:</b>
+                    </h3>
                     <div className="sub-header-description">
                         <h2>{post.description}</h2>
                     </div>
 
-                    <h3><b>your answer:</b></h3>
+                    <h3>
+                        <b>your answer:</b>
+                    </h3>
                     <form id="create-course" className="form-style">
                         <input
                             id="answer"

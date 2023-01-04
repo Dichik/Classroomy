@@ -6,6 +6,7 @@ import Header from './header/Header';
 import Home from './home/Home';
 import CreateCourse from './main/CreateCourse';
 import Main from './main/Main';
+import Deadline from './deadline/Deadline';
 
 export default function App() {
     return (
@@ -14,7 +15,7 @@ export default function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/courses" element={<Main />} />
+                    <Route exact path="/courses" element={<Main />} />
                     <Route exact path="/courses/:id" element={<Course />} />
                     <Route
                         exact
@@ -22,9 +23,14 @@ export default function App() {
                         element={<Post />}
                     />
                     <Route
-                        exect
-                        path="courses/create"
+                        exact
+                        path="/courses/create"
                         element={<CreateCourse />}
+                    />
+                    <Route
+                        exact
+                        path="posts/deadlines"
+                        element={<Deadline />}
                     />
                 </Routes>
             </Router>

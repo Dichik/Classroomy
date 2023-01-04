@@ -16,7 +16,7 @@ export default function Header() {
                         <Link to="/courses">my courses</Link>
                     </li>
                     <li>
-                        <Link to="/courses/:id/deadlines">homeworks</Link>
+                        <Link to="/posts/deadlines">homeworks</Link>
                     </li>
                     <li>
                         <Link to="/users/current">profile</Link>

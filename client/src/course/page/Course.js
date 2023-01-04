@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../../spinner/Spinner';
 import PostPreview from '../post/PostPreview';
+import DatePicker from 'react-date-picker';
 import './index.css';
 
 export default function Course() {
@@ -10,6 +11,7 @@ export default function Course() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [err, setErr] = useState('');
+    const [deadline, setDeadline] = useState(new Date());
 
     const location = useLocation();
     const course = location.state.course;
@@ -41,7 +43,8 @@ export default function Course() {
         const post = {
             title: title,
             description: description,
-            courseId: course.id
+            courseId: course.id,
+            deadline: deadline
         };
         const requestOptions = {
             method: 'POST',
@@ -117,6 +120,11 @@ export default function Course() {
                         type="text"
                         placeholder="description"
                         onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <DatePicker
+                        className="date-picker"
+                        onChange={setDeadline}
+                        value={deadline}
                     />
                     <button
                         className="submit-post-button"
