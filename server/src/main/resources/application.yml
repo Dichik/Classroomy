@@ -22,3 +22,9 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+
+domelian:
+  app:
+    jwtCookieName: domelian
+    jwtSecret: dOmelianSecretKey
+    jwtExpirationMs: 86400000
