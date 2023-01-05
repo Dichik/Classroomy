@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -30,6 +31,7 @@ public class PostController {
         this.modelMapper = modelMapper;
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto) {
@@ -37,6 +39,7 @@ public class PostController {
         return new ResponseEntity<>(this.postService.create(post), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Post post = this.postService.getById(id)
@@ -44,6 +47,7 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(value = "/{id:\\d+}/deadline", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeadline(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         try {
@@ -55,18 +59,21 @@ public class PostController {
         }
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.PATCH)
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         return new ResponseEntity<>(this.postService.update(id, postDto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(value = "/deadlines", method = RequestMethod.GET)
     public ResponseEntity<?> getDeadlines() {
         List<Post> posts = this.postService.getAssignmentsForNextWeek();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(value = "/deadlines", method = RequestMethod.GET, params = {"courseId"})
     public ResponseEntity<?> getDeadlinesForCourseId(@RequestParam Long courseId, @RequestParam(required = false, defaultValue = "false") boolean urgent) {
         List<PostDto> posts;
@@ -85,6 +92,7 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(method = RequestMethod.GET, params = {"courseId"})
     public ResponseEntity<List<Post>> getPostsByCourseId(@RequestParam Long courseId) {
         List<Post> posts = this.postService.getByCourseId(courseId);

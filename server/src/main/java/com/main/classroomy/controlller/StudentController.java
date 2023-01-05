@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -29,6 +30,7 @@ public class StudentController {
         this.modelMapper = modelMapper;
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAll() {
         List<User> students = this.studentService.getAll();
@@ -39,6 +41,7 @@ public class StudentController {
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
     public ResponseEntity<User> getById(@PathVariable Long id) {
         User student = this.studentService.getById(id)
@@ -46,6 +49,7 @@ public class StudentController {
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UserDto> create(@Valid @RequestBody UserDto userDto) {
         UserDto createdStudent = this.modelMapper.map(this.studentService.create(userDto), UserDto.class);
@@ -56,12 +60,14 @@ public class StudentController {
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable Long id) {
         this.studentService.deleteById(id);
         return new ResponseEntity<>("Student was deleted successfully!", HttpStatus.NO_CONTENT);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
         User student = this.studentService.updateById(id, userDto);

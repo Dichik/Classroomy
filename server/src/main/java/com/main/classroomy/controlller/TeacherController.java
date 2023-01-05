@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,6 +29,7 @@ public class TeacherController {
         this.modelMapper = modelMapper;
     }
 
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
     public ResponseEntity<UserDto> getById(@PathVariable Long id) {
         User user = this.teacherService.getById(id)
@@ -35,6 +37,7 @@ public class TeacherController {
         return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.OK);
     }
 
+//    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@Valid @RequestBody UserDto userDto) {
         User user = this.teacherService.create(userDto);
@@ -45,12 +48,14 @@ public class TeacherController {
         return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable Long id) {
         this.teacherService.deleteById(id);
         return new ResponseEntity<>("Teacher was successfully deleted!", HttpStatus.NO_CONTENT);
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
     public ResponseEntity<UserDto> update(@PathVariable Long id, @Valid @RequestBody UserDto teacherDto) {
         User user = this.teacherService.updateById(id, teacherDto);
