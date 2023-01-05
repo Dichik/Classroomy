@@ -4,8 +4,6 @@ import com.main.classroomy.entity.Course;
 import com.main.classroomy.entity.Post;
 import com.main.classroomy.repository.CourseRepository;
 import com.main.classroomy.repository.PostRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,7 +17,6 @@ import java.util.Random;
 @Component
 @DependsOn({"courseDataLoader"})
 public class PostDataLoader implements ApplicationRunner {
-    private static final Logger logger = LogManager.getLogger(PostDataLoader.class);
 
     private final PostRepository postRepository;
     private final CourseRepository courseRepository;
@@ -42,7 +39,6 @@ public class PostDataLoader implements ApplicationRunner {
                     .courseId(random.nextLong(courses.size()))
                     .build();
             posts.add(post);
-            logger.info("post was added to course with id=" + post.getCourseId());
         }
         this.postRepository.saveAll(posts);
     }

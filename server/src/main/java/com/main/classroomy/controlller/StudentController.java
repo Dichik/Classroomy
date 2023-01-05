@@ -1,7 +1,7 @@
 package com.main.classroomy.controlller;
 
-import com.main.classroomy.entity.Student;
-import com.main.classroomy.entity.dto.StudentDto;
+import com.main.classroomy.entity.User;
+import com.main.classroomy.entity.dto.UserDto;
 import com.main.classroomy.service.StudentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,8 +30,8 @@ public class StudentController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Student>> getAll() {
-        List<Student> students = this.studentService.getAll();
+    public ResponseEntity<List<User>> getAll() {
+        List<User> students = this.studentService.getAll();
         if (students.isEmpty()) {
             logger.info("There are no students...");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -40,15 +40,15 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
-    public ResponseEntity<Student> getById(@PathVariable Long id) {
-        Student student = this.studentService.getById(id)
+    public ResponseEntity<User> getById(@PathVariable Long id) {
+        User student = this.studentService.getById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student with id=" + id + " was not found!"));
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<StudentDto> create(@Valid @RequestBody StudentDto studentDto) {
-        StudentDto createdStudent = this.modelMapper.map(this.studentService.create(studentDto), StudentDto.class);
+    public ResponseEntity<UserDto> create(@Valid @RequestBody UserDto userDto) {
+        UserDto createdStudent = this.modelMapper.map(this.studentService.create(userDto), UserDto.class);
         if (createdStudent == null) {
             logger.warn("Something went wrong with creation of the student...");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -63,9 +63,9 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody StudentDto studentDto) {
-        Student student = this.studentService.updateById(id, studentDto);
-        return new ResponseEntity<>(this.modelMapper.map(student, StudentDto.class), HttpStatus.OK);
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
+        User student = this.studentService.updateById(id, userDto);
+        return new ResponseEntity<>(this.modelMapper.map(student, UserDto.class), HttpStatus.OK);
     }
 
 }

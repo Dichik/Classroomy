@@ -1,9 +1,9 @@
 package com.main.classroomy.service;
 
-import com.main.classroomy.entity.Student;
-import com.main.classroomy.entity.dto.StudentDto;
+import com.main.classroomy.entity.User;
+import com.main.classroomy.entity.dto.UserDto;
 import com.main.classroomy.exception.StudentNotFoundException;
-import com.main.classroomy.repository.StudentRepository;
+import com.main.classroomy.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
@@ -17,45 +17,45 @@ import java.util.Optional;
 public class StudentService {
     private static final Logger logger = LogManager.getLogger(StudentService.class);
 
-    private final StudentRepository studentRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, ModelMapper modelMapper) {
-        this.studentRepository = studentRepository;
+    public StudentService(UserRepository userRepository, ModelMapper modelMapper) {
+        this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<Student> getAll() {
-        return this.studentRepository.findAll();
+    public List<User> getAll() {
+        return this.userRepository.findAll();
     }
 
-    public Optional<Student> getById(Long id) {
-        return this.studentRepository.findById(id);
+    public Optional<User> getById(Long id) {
+        return this.userRepository.findById(id);
     }
 
-    public Optional<Student> getByEmail(String email) {
-        return this.studentRepository.findByEmail(email);
+    public Optional<User> getByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 
-    public Student create(StudentDto studentDto) {
-        return this.studentRepository.save(this.modelMapper.map(studentDto, Student.class));
+    public User create(UserDto userDto) {
+        return this.userRepository.save(this.modelMapper.map(userDto, User.class));
     }
 
-    public Student updateById(Long id, StudentDto studentDto) {
-        if (!this.studentRepository.existsById(id)) {
+    public User updateById(Long id, UserDto userDto) {
+        if (!this.userRepository.existsById(id)) {
             throw new StudentNotFoundException(String.format("Student with id=%s was not found!", id));
         }
-        Student student = this.modelMapper.map(studentDto, Student.class);
-        student.setId(id);
-        return this.studentRepository.save(student);
+        User user = this.modelMapper.map(userDto, User.class);
+        user.setId(id);
+        return this.userRepository.save(user);
     }
 
     public void deleteById(Long id) {
-        if (!this.studentRepository.existsById(id)) {
+        if (!this.userRepository.existsById(id)) {
             throw new StudentNotFoundException(String.format("Student with id=%s was not found!", id));
         }
-        this.studentRepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 
 }

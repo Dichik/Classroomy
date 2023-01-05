@@ -1,7 +1,7 @@
 package com.main.classroomy.controlller;
 
-import com.main.classroomy.entity.Teacher;
-import com.main.classroomy.entity.dto.TeacherDto;
+import com.main.classroomy.entity.User;
+import com.main.classroomy.entity.dto.UserDto;
 import com.main.classroomy.exception.TeacherNotFoundException;
 import com.main.classroomy.service.TeacherService;
 import org.apache.logging.log4j.LogManager;
@@ -29,20 +29,20 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.GET)
-    public ResponseEntity<TeacherDto> getById(@PathVariable Long id) {
-        Teacher teacher = this.teacherService.getById(id)
+    public ResponseEntity<UserDto> getById(@PathVariable Long id) {
+        User user = this.teacherService.getById(id)
                 .orElseThrow(() -> new TeacherNotFoundException(String.format("Teacher with id=%s was not found.", id)));
-        return new ResponseEntity<>(this.modelMapper.map(teacher, TeacherDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<TeacherDto> create(@Valid @RequestBody TeacherDto teacherDto) {
-        Teacher teacher = this.teacherService.create(teacherDto);
-        if (teacher == null) {
+    public ResponseEntity<?> create(@Valid @RequestBody UserDto userDto) {
+        User user = this.teacherService.create(userDto);
+        if (user == null) {
             logger.warn("Something went wrong, couldn't create teacher...");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(this.modelMapper.map(teacher, TeacherDto.class), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
@@ -52,9 +52,9 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.PUT)
-    public ResponseEntity<TeacherDto> update(@PathVariable Long id, @Valid @RequestBody TeacherDto teacherDto) {
-        Teacher teacher = this.teacherService.updateById(id, teacherDto);
-        return new ResponseEntity<>(this.modelMapper.map(teacher, TeacherDto.class), HttpStatus.OK);
+    public ResponseEntity<UserDto> update(@PathVariable Long id, @Valid @RequestBody UserDto teacherDto) {
+        User user = this.teacherService.updateById(id, teacherDto);
+        return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.OK);
     }
 
 }
