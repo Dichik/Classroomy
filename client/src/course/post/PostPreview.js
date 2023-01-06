@@ -2,7 +2,7 @@ import { React } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-export default function PostPreview({ post }) {
+export default function PostPreview({ courseId, post }) {
     return (
         <div className="post-box">
             <p className="post-title">{post.title}!</p>
@@ -13,7 +13,10 @@ export default function PostPreview({ post }) {
                 <Link
                     id={post.id}
                     className="link-button"
-                    to={window.location.pathname + `/posts/${post.id}`}
+                    to={{
+                        pathname: window.location.pathname + `/posts/${post.id}`,
+                        courseId: courseId
+                    }}
                 >
                     open
                 </Link>

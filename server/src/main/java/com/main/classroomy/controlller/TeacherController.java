@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/teachers")
+@RequestMapping("/api/teachers")
 public class TeacherController {
     private static final Logger logger = LogManager.getLogger(TeacherController.class);
 
@@ -37,7 +37,7 @@ public class TeacherController {
         return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasRole('TEACHER')")
+    //    @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@Valid @RequestBody UserDto userDto) {
         User user = this.teacherService.create(userDto);

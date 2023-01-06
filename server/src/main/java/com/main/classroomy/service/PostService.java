@@ -82,4 +82,8 @@ public class PostService {
     public List<Post> getAssignmentsWithDeadlines(Long courseId) {
         return this.postRepository.findAllByCourseIdAndDeadlineNotNull(courseId);
     }
+
+    public Optional<Post> getByIdAndCourseId(Long id, Long courseId) {
+        return this.postRepository.findByIdAndCourseId(id, courseId);
+    }
 }

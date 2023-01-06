@@ -10,6 +10,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -38,6 +40,9 @@ public class PostDataLoader implements ApplicationRunner {
                     .description("to do task " + i)
                     .courseId(random.nextLong(courses.size()))
                     .build();
+            if (i % 4 == 0) {
+                post.setDeadline(Date.valueOf(LocalDate.now()));
+            }
             posts.add(post);
         }
         this.postRepository.saveAll(posts);
