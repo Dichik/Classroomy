@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 public class PostController {
     private static final Logger logger = LogManager.getLogger(PostController.class);
 
@@ -43,6 +43,14 @@ public class PostController {
     @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET)
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Post post = this.postService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Post with id=" + id + " was not found!"));
+        return new ResponseEntity<>(post, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
+    @RequestMapping(value = "/{id:\\d+}", method = RequestMethod.GET, params = {"courseId"})
+    public ResponseEntity<?> findByIdAndCourseId(@PathVariable Long id, @RequestParam Long courseId) {
+        Post post = this.postService.getByIdAndCourseId(id, courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Post with id=" + id + " was not found!"));
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
