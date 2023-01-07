@@ -10,13 +10,13 @@ import Register from './components/auth/register.component';
 import Home from './components/home/home.component';
 import Profile from './components/profile/profile.component';
 
-// import AuthVerify from "./common/auth-verify";
 import EventBus from './common/EventBus';
 import Post from './components/post/post';
-import Main from './components/main.component';
+import Main from './components/main/main.component';
 import CreateCourse from './components/course/course.create.component';
 import Deadline from './components/post/posts.deadlines.component';
-import Course from './course/page/course';
+import Course from './components/page/course';
+import Journal from './components/student/journal.component';
 
 class App extends Component {
     constructor(props) {
@@ -24,7 +24,6 @@ class App extends Component {
         this.logOut = this.logOut.bind(this);
 
         this.state = {
-            showTeacherBoard: false,
             currentUser: undefined
         };
     }
@@ -34,8 +33,7 @@ class App extends Component {
 
         if (user) {
             this.setState({
-                currentUser: user,
-                showTeacherBoard: user.roles.includes('ROLE_TEACHER')
+                currentUser: user
             });
         }
 
@@ -51,13 +49,12 @@ class App extends Component {
     logOut() {
         AuthService.logout();
         this.setState({
-            showTeacherBoard: false,
             currentUser: undefined
         });
     }
 
     render() {
-        const { currentUser, showTeacherBoard } = this.state;
+        const { currentUser } = this.state;
 
         return (
             <div>
@@ -71,14 +68,6 @@ class App extends Component {
                                 Home
                             </Link>
                         </li>
-
-                        {showTeacherBoard && (
-                            <li className="nav-item">
-                                <Link to={'/students'} className="nav-link">
-                                    Teacher Board
-                                </Link>
-                            </li>
-                        )}
 
                         {currentUser && (
                             <div className="navbar-nav ml-auto">
@@ -140,9 +129,12 @@ class App extends Component {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/profile" element={<Profile />} />
-                        {/* <Route path="/user" element={<BoardUser />} /> */}
-                        {/* <Route path="/admin" element={<BoardAdmin />} /> */}
                         <Route exact path="/courses" element={<Main />} />
+                        <Route
+                            exact
+                            path="/students/:id"
+                            element={<Journal />}
+                        />
                         <Route exact path="/courses/:id" element={<Course />} />
                         <Route
                             exact
@@ -161,33 +153,9 @@ class App extends Component {
                         />
                     </Routes>
                 </div>
-
-                {/* <AuthVerify logOut={this.logOut}/> */}
             </div>
         );
     }
 }
 
 export default App;
-
-// import { React } from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Course from './course/page/Course';
-// import Post from './course/post/Post';
-// import Header from './header/Header';
-// import Home from './home/Home';
-// import CreateCourse from './main/CreateCourse';
-// import Main from './main/Main';
-// import Deadline from './deadline/Deadline';
-
-// export default function App() {
-//     return (
-//         <div>
-//             <Router>
-//                 <Routes>
-
-//                 </Routes>
-//             </Router>
-//         </div>
-//     );
-// }

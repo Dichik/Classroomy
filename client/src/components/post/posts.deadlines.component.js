@@ -3,8 +3,10 @@ import Spinner from '../spinner/spinner.component';
 import PostService from '../../services/post.service';
 import styled from 'styled-components';
 import Table from './table.component';
+import { withRouter } from '../../common/with-router';
+import './index.css';
 
-export default class Deadline extends Component {
+class Deadline extends Component {
     constructor(props) {
         super(props);
 
@@ -44,13 +46,15 @@ export default class Deadline extends Component {
     }
 }
 
+export default withRouter(Deadline);
+
 const Styles = styled.div`
     padding: 1rem;
+    width: 800px;
 
     table {
         border-spacing: 0;
         border: 1px solid black;
-        width: 1000px;
 
         tr {
             :last-child {

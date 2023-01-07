@@ -1,0 +1,30 @@
+.search-input {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-input-field {
+    width: 600px;
+}
+
+.create-course-box {
+    text-align: center;
+    width: 200px;
+    height: 30px;
+    background-color: #212529;
+
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+.create-course {
+    text-decoration: none;
+
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.create-course:hover {
+    text-decoration: none;
+}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-date-picker';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Spinner from '../../components/spinner/spinner.component';
+import Spinner from '../spinner/spinner.component';
 import authHeader from '../../services/auth-header';
 import authService from '../../services/auth.service';
 import postService from '../../services/post.service';
 import PostPreview from '../post/PostPreview';
+import './index.css';
 
 export default function Course() {
     const [loading, setLoading] = useState(false);
@@ -89,36 +90,34 @@ export default function Course() {
                     {err}
                 </h2>
             )}{' '}
-            {/* TODO add popup window with the error */}
             <div className="course-details-page">
                 <div className="sub-header">
-                    <h2 className="course-details-title">course.name</h2>
-                    {showEnrollmentKey && (
-                        <h3>
-                            <label>
-                                Enrollment Key:{' '}
-                                {course.enrollmentKey
-                                    ? course.enrollmentKey
-                                    : 'No enrollment key'}
-                            </label>
-                        </h3>
-                    )}
-                    {/* <div className="course-actions">
-                        <label id="actions">choose an action: </label>
-
-                        <select name="actions" id="actions" onChange={doSomething}>
-                            <option value="no-action" defaultChecked>no action</option>
-                            <option value="mark-as-done">mark as done</option>
-                        </select>
-                    </div> */}
-                    <div className="course-details-back-button">
-                        <button
-                            className="cdb-button-style"
-                            onClick={handleBackClick}
-                        >
-                            back
-                        </button>
+                    <div className='course-details-title'>
+                        <h2>
+                            {course.name}
+                            <span>
+                                {showEnrollmentKey && (
+                                    <h3>
+                                        <label className="enrollment-key-label">
+                                            Enrollment Key:{' '}
+                                            {course.enrollmentKey
+                                                ? course.enrollmentKey
+                                                : 'No enrollment key'}
+                                        </label>
+                                    </h3>
+                                )}
+                            </span>
+                        </h2>
                     </div>
+                    <button
+                        className="btn btn-primary btn-block button-back"
+                        style={{
+                            marginTop: '20px'
+                        }}
+                        onClick={handleBackClick}
+                    >
+                        back
+                    </button>
                 </div>
                 <form id="course-create" className="course-create">
                     <input
@@ -142,12 +141,17 @@ export default function Course() {
                         onChange={setDeadline}
                         value={deadline}
                     />
-                    <button
-                        className="submit-post-button"
-                        onClick={handlePostSubmit}
-                    >
-                        create post
-                    </button>
+                    <div className="form-group ">
+                        <button
+                            className="btn btn-primary btn-block"
+                            style={{
+                                marginTop: '20px'
+                            }}
+                            onClick={handlePostSubmit}
+                        >
+                            create post
+                        </button>
+                    </div>
                 </form>
                 {posts.length !== 0 ? (
                     posts.map((post) => {

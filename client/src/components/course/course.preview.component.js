@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import './index.css';
+import './index.css';
 
 export default class CoursePreview extends Component {
     constructor(props) {
@@ -15,17 +15,29 @@ export default class CoursePreview extends Component {
         const course = this.state.course;
 
         return (
-            <div key={course.id}>
-                <h2>{course.name}</h2>
-                <Link
-                    id={`${course.id}`}
-                    to={{
-                        pathname: `/courses/${course.id}`
-                    }}
-                    state={{ course }}
-                >
-                    open
-                </Link>
+            <div className="course-preview-box" key={course.id}>
+                <h2 className="course-title">{course.name}</h2>
+                <div className="buttons">
+                    <Link
+                        id={`${course.id}`}
+                        className="open-course-button"
+                        to={{
+                            pathname: `/courses/${course.id}`
+                        }}
+                        state={{ course }}
+                    >
+                        open
+                    </Link>
+                    <Link
+                        id={`${course.id}`}
+                        className="open-course-button"
+                        to={{
+                            pathname: `/students/${course.id}`
+                        }}
+                    >
+                        students
+                    </Link>
+                </div>
             </div>
         );
     }

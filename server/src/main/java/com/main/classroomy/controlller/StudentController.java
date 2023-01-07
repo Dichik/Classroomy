@@ -30,14 +30,11 @@ public class StudentController {
         this.modelMapper = modelMapper;
     }
 
-    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getAll() {
-        List<User> students = this.studentService.getAll();
-        if (students.isEmpty()) {
-            logger.info("There are no students...");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+    @PreAuthorize("hasRole('TEACHER')")
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+    @RequestMapping(method = RequestMethod.GET, params = {"courseId"})
+    public ResponseEntity<List<User>> getAll(@RequestParam Long courseId) {
+        List<User> students = this.studentService.getAllEnrolledInCourse(courseId);
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
