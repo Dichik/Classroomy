@@ -15,8 +15,7 @@ class CourseService {
         };
         const headers = authHeader();
         const requestOptions = {
-            method: "post",
-            url: API_URL,
+            method: 'post',
             headers: headers,
             data: JSON.stringify(course)
         };
@@ -27,6 +26,19 @@ class CourseService {
         return axios.get(API_URL + `?courseId=${id}`, {
             headers: authHeader()
         });
+    }
+
+    enrollToCourse(enrollmentKey) {
+        const course = {
+            enrollmentKey: enrollmentKey
+        };
+        const headers = authHeader();
+        const requestOptions = {
+            method: 'post',
+            headers: headers,
+            data: JSON.stringify(course)
+        };
+        return axios(API_URL + "/enroll", requestOptions);
     }
 }
 

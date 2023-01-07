@@ -73,6 +73,7 @@ import { Link } from 'react-router-dom';
 import CoursePreview from './course/course.preview.component';
 import Spinner from './spinner/spinner.component';
 import courseService from '../services/course.service';
+import authService from '../services/auth.service';
 
 export default class Main extends Component {
     constructor(props) {
@@ -81,12 +82,17 @@ export default class Main extends Component {
         this.onChangeInput = this.onChangeInput.bind(this);
         this.onChangeCourses = this.onChangeCourses.bind(this);
         this.onChangeLoading = this.onChangeLoading.bind(this);
+        this.onChangeEnrollmentKey = this.onChangeEnrollmentKey.bind(this);
 
         this.state = {
             input: '',
             courses: [],
             loading: false,
-            filteredCourses: []
+            filteredCourses: [],
+            user: undefined,
+            showEnrollmentField: false,
+            enrollmentKey: '',
+            message: ''
         };
     }
 
@@ -109,7 +115,22 @@ export default class Main extends Component {
         });
     }
 
+    onChangeEnrollmentKey(e) {
+        this.setState({
+            enrollmentKey: e.target.value
+        });
+    }
+
     componentDidMount() {
+        const user = authService.getCurrentUser();
+
+        if (user) {
+            this.setState({
+                currentUser: user,
+                showEnrollmentField: user.roles.includes('ROLE_STUDENT')
+            });
+        }
+
         this.onChangeLoading;
         courseService
             .getCourses()
@@ -120,6 +141,18 @@ export default class Main extends Component {
                 this.onChangeLoading;
             });
     }
+
+    enrollToCourse = () =>  {
+        courseService
+            .enrollToCourse(this.state.enrollmentKey)
+            .then((response) => response.data)
+            .then((data) => {
+                console.log(data);
+                this.setState({
+                    message: data
+                })
+            });
+    };
 
     filterCourses = () => {
         if (this.state.input === '') {
@@ -146,8 +179,43 @@ export default class Main extends Component {
                     <Spinner />
                 ) : (
                     <div>
-                        <Link to="/courses/create">create course</Link>
-                        <form>
+                        {this.state.showEnrollmentField ? (
+                            <div>
+                                <input
+                                    value={this.state.enrollmentKey}
+                                    type="text"
+                                    placeholder="enrollment key"
+                                    onChange={this.onChangeEnrollmentKey}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={this.enrollToCourse}
+                                >
+                                    Enroll
+                                </button>
+                            </div>
+                        ) : (
+                            <Link to="/courses/create">create course</Link>
+                        )}
+                        {this.state.message && (
+                            <div className="form-group">
+                                <div
+                                    className={
+                                        this.state.successful
+                                            ? 'alert alert-success'
+                                            : 'alert alert-danger'
+                                    }
+                                    role="alert"
+                                >
+                                    {this.state.message}
+                                </div>
+                            </div>
+                        )}
+                        <form
+                            style={{
+                                marginTop: '20px'
+                            }}
+                        >
                             <input
                                 value={this.state.input}
                                 type="text"

@@ -12,6 +12,6 @@ public class CourseDto {
 
     private String description;
 
-    private List<Post> posts;
+    private String enrollmentKey;
 
 }

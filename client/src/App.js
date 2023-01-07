@@ -9,12 +9,9 @@ import Login from './components/auth/login.component';
 import Register from './components/auth/register.component';
 import Home from './components/home/home.component';
 import Profile from './components/profile/profile.component';
-import BoardUser from './components/board-user.component';
-import BoardAdmin from './components/board-admin.component';
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from './common/EventBus';
-import Header from './components/header/header.component';
 import Post from './components/post/post';
 import Main from './components/main.component';
 import CreateCourse from './components/course/course.create.component';
@@ -64,7 +61,6 @@ class App extends Component {
 
         return (
             <div>
-                <Header />
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <Link to={'/'} className="navbar-brand">
                         classroomy
@@ -78,18 +74,28 @@ class App extends Component {
 
                         {showTeacherBoard && (
                             <li className="nav-item">
-                                <Link to={'/admin'} className="nav-link">
+                                <Link to={'/students'} className="nav-link">
                                     Teacher Board
                                 </Link>
                             </li>
                         )}
 
                         {currentUser && (
-                            <li className="nav-item">
-                                <Link to={'/courses'} className="nav-link">
-                                    User
-                                </Link>
-                            </li>
+                            <div className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link to={'/courses'} className="nav-link">
+                                        My Courses
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        to={'/posts/deadlines'}
+                                        className="nav-link"
+                                    >
+                                        My Homeworks
+                                    </Link>
+                                </li>
+                            </div>
                         )}
                     </div>
 
@@ -134,8 +140,8 @@ class App extends Component {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/profile" element={<Profile />} />
-                        <Route path="/user" element={<BoardUser />} />
-                        <Route path="/admin" element={<BoardAdmin />} />
+                        {/* <Route path="/user" element={<BoardUser />} /> */}
+                        {/* <Route path="/admin" element={<BoardAdmin />} /> */}
                         <Route exact path="/courses" element={<Main />} />
                         <Route exact path="/courses/:id" element={<Course />} />
                         <Route
