@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-date-picker';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Spinner from '../../components/spinner/spinner.component';
+import Spinner from '../spinner/spinner.component';
 import authHeader from '../../services/auth-header';
 import authService from '../../services/auth.service';
 import postService from '../../services/post.service';

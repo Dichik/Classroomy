@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner } from 'reactstrap';
-import { withRouter } from '../common/with-router';
-import studentService from '../services/student.service';
+import { withRouter } from '../../common/with-router';
+import studentService from '../../services/student.service';
 import "./index.css";
 
 class Journal extends Component {

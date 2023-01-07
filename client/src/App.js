@@ -16,8 +16,8 @@ import Post from './components/post/post';
 import Main from './components/main.component';
 import CreateCourse from './components/course/course.create.component';
 import Deadline from './components/post/posts.deadlines.component';
-import Course from './course/page/course';
-import Journal from './student/journal.component';
+import Course from './components/page/course';
+import Journal from './components/student/journal.component';
 
 class App extends Component {
     constructor(props) {
