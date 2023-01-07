@@ -26,6 +26,14 @@ export default class CoursePreview extends Component {
                 >
                     open
                 </Link>
+                <Link
+                    id={`${course.id}`}
+                    to={{
+                        pathname: `/students/${course.id}`
+                    }}
+                >
+                    open
+                </Link>
             </div>
         );
     }

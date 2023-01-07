@@ -92,7 +92,7 @@ export default function Course() {
             {/* TODO add popup window with the error */}
             <div className="course-details-page">
                 <div className="sub-header">
-                    <h2 className="course-details-title">course.name</h2>
+                    <h2 className="course-details-title">{course.name}</h2>
                     {showEnrollmentKey && (
                         <h3>
                             <label>

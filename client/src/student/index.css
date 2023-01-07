@@ -1,0 +1,9 @@
+td {
+    border: 1px solid #333;
+}
+
+table {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}

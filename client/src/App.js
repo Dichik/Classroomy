@@ -17,6 +17,7 @@ import Main from './components/main.component';
 import CreateCourse from './components/course/course.create.component';
 import Deadline from './components/post/posts.deadlines.component';
 import Course from './course/page/course';
+import Journal from './student/journal.component';
 
 class App extends Component {
     constructor(props) {
@@ -74,7 +75,7 @@ class App extends Component {
 
                         {showTeacherBoard && (
                             <li className="nav-item">
-                                <Link to={'/students'} className="nav-link">
+                                <Link to={'/'} className="nav-link">
                                     Teacher Board
                                 </Link>
                             </li>
@@ -143,6 +144,11 @@ class App extends Component {
                         {/* <Route path="/user" element={<BoardUser />} /> */}
                         {/* <Route path="/admin" element={<BoardAdmin />} /> */}
                         <Route exact path="/courses" element={<Main />} />
+                        <Route
+                            exact
+                            path="/students/:id"
+                            element={<Journal />}
+                        />
                         <Route exact path="/courses/:id" element={<Course />} />
                         <Route
                             exact

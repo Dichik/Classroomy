@@ -142,15 +142,16 @@ export default class Main extends Component {
             });
     }
 
-    enrollToCourse = () =>  {
+    enrollToCourse = () => {
         courseService
             .enrollToCourse(this.state.enrollmentKey)
             .then((response) => response.data)
             .then((data) => {
                 console.log(data);
                 this.setState({
+                    successful: true,
                     message: data
-                })
+                });
             });
     };
 

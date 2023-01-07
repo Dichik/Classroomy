@@ -1,29 +1,31 @@
 package com.main.classroomy.service;
 
+import com.main.classroomy.entity.CourseUser;
 import com.main.classroomy.entity.User;
 import com.main.classroomy.entity.dto.UserDto;
 import com.main.classroomy.exception.StudentNotFoundException;
+import com.main.classroomy.repository.CourseUserRepository;
 import com.main.classroomy.repository.UserRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private static final Logger logger = LogManager.getLogger(StudentService.class);
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final CourseUserRepository courseUserRepository;
 
     @Autowired
-    public StudentService(UserRepository userRepository, ModelMapper modelMapper) {
+    public StudentService(UserRepository userRepository, ModelMapper modelMapper, CourseUserRepository courseUserRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.courseUserRepository = courseUserRepository;
     }
 
     public List<User> getAll() {
@@ -58,4 +60,11 @@ public class StudentService {
         this.userRepository.deleteById(id);
     }
 
+    public List<User> getAllEnrolledInCourse(Long courseId) {
+        List<String> usernames = this.courseUserRepository.findAllByCourseId(courseId).stream()
+                .map(CourseUser::getUsername).toList();
+        return usernames.stream().map(this.userRepository::findByUsername
+                ).filter(Optional::isPresent).map(Optional::get)
+                .collect(Collectors.toList());
+    }
 }

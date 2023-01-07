@@ -38,7 +38,7 @@ class CourseService {
             headers: headers,
             data: JSON.stringify(course)
         };
-        return axios(API_URL + "/enroll", requestOptions);
+        return axios(API_URL + '/enroll', requestOptions);
     }
 }
 
