@@ -6,7 +6,7 @@ import Spinner from '../spinner/spinner.component';
 
 export default function Post() {
     const { id } = useParams();
-    const courseId = window.location.pathname.split("/")[2]
+    const courseId = window.location.pathname.split('/')[2];
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);

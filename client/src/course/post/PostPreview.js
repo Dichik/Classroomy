@@ -14,7 +14,8 @@ export default function PostPreview({ courseId, post }) {
                     id={post.id}
                     className="link-button"
                     to={{
-                        pathname: window.location.pathname + `/posts/${post.id}`,
+                        pathname:
+                            window.location.pathname + `/posts/${post.id}`,
                         courseId: courseId
                     }}
                 >

@@ -15,7 +15,9 @@ class PostService {
     };
 
     getPostById = (courseId, id) => {
-        return axios.get(API_URL + `/${id}?courseId=${courseId}`, { headers: authHeader()});
+        return axios.get(API_URL + `/${id}?courseId=${courseId}`, {
+            headers: authHeader()
+        });
     };
 
     updateAnswerToPost = (id, answer) => {

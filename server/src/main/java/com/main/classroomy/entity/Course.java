@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,5 +27,11 @@ public class Course {
 
     @Size(max = 255)
     private String description;
+
+    @Column(updatable = false, unique = true)
+    private String enrollmentKey;
+
+    @Column(updatable = false)
+    private String createdByUsername;
 
 }

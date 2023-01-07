@@ -2,6 +2,7 @@ package com.main.classroomy.controlller;
 
 import com.main.classroomy.entity.Course;
 import com.main.classroomy.entity.dto.CourseDto;
+import com.main.classroomy.security.service.UserDetailsImpl;
 import com.main.classroomy.service.CourseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/courses")
@@ -32,13 +37,26 @@ public class CourseController {
 
     @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Course>> getAll() { // TODO add pageable
-        List<Course> courses = this.courseService.getAll();
-        if (courses.isEmpty()) {
-            logger.info("List of courses is empty!");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<List<Course>> getAll(@AuthenticationPrincipal UserDetailsImpl userDetails) { // TODO add pageable
+        String username = userDetails.getUsername();
+        List<Course> courses;
+        Set<String> roles = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toSet());
+        if (roles.contains("ROLE_TEACHER")) {
+            courses = this.courseService.getAllByCreatedByUsername(username);
+        } else {
+            courses = this.courseService.getAllByUsername(username);
         }
         return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('STUDENT')")
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+    @RequestMapping(value = "/enroll", method = RequestMethod.POST)
+    public ResponseEntity<?> enroll(@RequestBody CourseDto courseDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        this.courseService.enroll(courseDto.getEnrollmentKey(), userDetails);
+        return ResponseEntity.ok().body("enrolled successfully.");
     }
 
     @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
@@ -54,8 +72,9 @@ public class CourseController {
     @PreAuthorize("hasRole('TEACHER')")
     @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Course> create(@Valid @RequestBody CourseDto courseDto) {
-        return new ResponseEntity<>(this.courseService.create(courseDto), HttpStatus.CREATED);
+    public ResponseEntity<Course> create(@Valid @RequestBody CourseDto courseDto,
+                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return new ResponseEntity<>(this.courseService.create(courseDto, userDetails), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('TEACHER')")

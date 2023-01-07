@@ -3,6 +3,7 @@ import DatePicker from 'react-date-picker';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../../components/spinner/spinner.component';
 import authHeader from '../../services/auth-header';
+import authService from '../../services/auth.service';
 import postService from '../../services/post.service';
 import PostPreview from '../post/PostPreview';
 
@@ -13,6 +14,7 @@ export default function Course() {
     const [description, setDescription] = useState('');
     const [err, setErr] = useState('');
     const [deadline, setDeadline] = useState(new Date());
+    const [showEnrollmentKey, setShowEnrollmentKey] = useState(false);
 
     const location = useLocation();
     const course = location.state.course;
@@ -27,6 +29,11 @@ export default function Course() {
                 setPosts(data);
                 setLoading(false);
             });
+
+        const user = authService.getCurrentUser();
+        if (user) {
+            setShowEnrollmentKey(user.roles.includes('ROLE_TEACHER'));
+        }
         setLoading(false);
     }, []);
 
@@ -42,7 +49,7 @@ export default function Course() {
             courseId: course.id,
             deadline: deadline
         };
-        
+
         const requestOptions = {
             method: 'POST',
             headers: authHeader(),
@@ -58,8 +65,8 @@ export default function Course() {
             }
 
             const data = await response.json();
-            posts.push(data);
             console.log('result is', data);
+            window.location.reload();
         } catch (err) {
             setErr(err.message);
         } finally {
@@ -85,11 +92,17 @@ export default function Course() {
             {/* TODO add popup window with the error */}
             <div className="course-details-page">
                 <div className="sub-header">
-                    <h2 className="course-details-title">
-                        {course === null || course.name !== null
-                            ? course.name
-                            : 'loading course name...'}
-                    </h2>
+                    <h2 className="course-details-title">course.name</h2>
+                    {showEnrollmentKey && (
+                        <h3>
+                            <label>
+                                Enrollment Key:{' '}
+                                {course.enrollmentKey
+                                    ? course.enrollmentKey
+                                    : 'No enrollment key'}
+                            </label>
+                        </h3>
+                    )}
                     {/* <div className="course-actions">
                         <label id="actions">choose an action: </label>
 
@@ -138,7 +151,13 @@ export default function Course() {
                 </form>
                 {posts.length !== 0 ? (
                     posts.map((post) => {
-                        return <PostPreview key={post.id} courseId={course.id} post={post} />;
+                        return (
+                            <PostPreview
+                                key={post.id}
+                                courseId={course.id}
+                                post={post}
+                            />
+                        );
                     })
                 ) : (
                     <h2 className="no-posts-title">
