@@ -12,7 +12,7 @@ import Profile from './components/profile/profile.component';
 
 import EventBus from './common/EventBus';
 import Post from './components/post/post';
-import Main from './components/main.component';
+import Main from './components/main/main.component';
 import CreateCourse from './components/course/course.create.component';
 import Deadline from './components/post/posts.deadlines.component';
 import Course from './components/page/course';

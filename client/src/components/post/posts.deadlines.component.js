@@ -4,6 +4,7 @@ import PostService from '../../services/post.service';
 import styled from 'styled-components';
 import Table from './table.component';
 import { withRouter } from '../../common/with-router';
+import './index.css';
 
 class Deadline extends Component {
     constructor(props) {
@@ -49,11 +50,11 @@ export default withRouter(Deadline);
 
 const Styles = styled.div`
     padding: 1rem;
+    width: 800px;
 
     table {
         border-spacing: 0;
         border: 1px solid black;
-        width: 1000px;
 
         tr {
             :last-child {

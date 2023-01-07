@@ -4,12 +4,8 @@
     font-family: Arial, Helvetica;
 }
 
-.course-details-page {
-    height: 84vh;
-}
-
 .course-details-title {
-    flex: 5;
+    flex: 6;
 
     display: flex;
     align-items: center;
@@ -17,7 +13,6 @@
 
     width: 300px;
     height: 100px;
-    margin-left: 10%;
 
     font-weight: 600;
     font-style: normal;
@@ -32,8 +27,12 @@
     align-items: center;
 }
 
-.course-actions {
-    flex: 2;
+.title-header {
+    flex: 6;
+}
+
+.button-back {
+    flex: 1;
 }
 
 .no-posts-title {
@@ -44,10 +43,6 @@
 
 .title-input {
     border: 3px solid #bbb;
-}
-
-input[type='text']:focus {
-    border: 3px solid #555;
 }
 
 .description-input {
@@ -62,15 +57,14 @@ input[type='text']:focus {
     margin-right: 25%;
 }
 
-.course-details-back-button {
-    flex: 1.5;
-}
-
-.cdb-button-style {
-    width: 100px;
-    height: 50px;
+.enrollment-key-label {
+    font-size: 14px;
 }
 
 .date-picker {
+    margin-bottom: 20px;
+}
+
+input {
     margin-bottom: 20px;
 }

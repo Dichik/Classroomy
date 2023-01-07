@@ -115,3 +115,9 @@ h3 {
     justify-content: center;
     text-align: center;
 }
+
+.deadlines-table {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

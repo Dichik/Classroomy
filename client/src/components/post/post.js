@@ -88,9 +88,17 @@ export default function Post() {
                                     : 'No deadline'}
                             </p>
                         </div>
-                        <button className="sht-button" onClick={handleClick}>
-                            back to course
-                        </button>
+                        <div className="form-group">
+                            <button
+                                className="btn btn-primary btn-block"
+                                style={{
+                                    marginTop: '20px'
+                                }}
+                                onClick={handleClick}
+                            >
+                                back to course
+                            </button>
+                        </div>
                     </div>
 
                     <h3>
@@ -112,7 +120,17 @@ export default function Post() {
                             value={answer}
                             onChange={(e) => setAnswer(e.target.value)}
                         />
-                        <button onClick={handleSubmit}>submit</button>
+                        <div className="form-group">
+                            <button
+                                className="btn btn-primary btn-block"
+                                style={{
+                                    marginTop: '20px'
+                                }}
+                                onClick={handleSubmit}
+                            >
+                                submit
+                            </button>
+                        </div>
                     </form>
                 </div>
             )}
