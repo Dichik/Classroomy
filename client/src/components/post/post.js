@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import postService from '../../services/post.service';
 import Spinner from '../spinner/spinner.component';
-// import './index.css';
+import './index.css';
 
 export default function Post() {
     const { id } = useParams();
