@@ -37,16 +37,16 @@ public class TeacherController {
         return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.OK);
     }
 
-    //    @PreAuthorize("hasRole('TEACHER')")
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> create(@Valid @RequestBody UserDto userDto) {
-        User user = this.teacherService.create(userDto);
-        if (user == null) {
-            logger.warn("Something went wrong, couldn't create teacher...");
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
-    }
+//    @PreAuthorize("hasRole('TEACHER')")
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseEntity<?> create(@Valid @RequestBody UserDto userDto) {
+//        User user = this.teacherService.create(userDto);
+//        if (user == null) {
+//            logger.warn("Something went wrong, couldn't create teacher...");
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//        return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
+//    }
 
     @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)

@@ -92,7 +92,7 @@ export default function Course() {
             )}{' '}
             <div className="course-details-page">
                 <div className="sub-header">
-                    <div className='course-details-title'>
+                    <div className="course-details-title">
                         <h2>
                             {course.name}
                             <span>
@@ -149,7 +149,7 @@ export default function Course() {
                             }}
                             onClick={handlePostSubmit}
                         >
-                            create post
+                            Create post
                         </button>
                     </div>
                 </form>

@@ -138,7 +138,8 @@ export default class Main extends Component {
                                                         this.state.enrollmentKey
                                                     }
                                                     onChange={
-                                                        this.onChangeEnrollmentKey
+                                                        this
+                                                            .onChangeEnrollmentKey
                                                     }
                                                 />
                                             </div>
@@ -179,7 +180,7 @@ export default class Main extends Component {
                                     className="create-course"
                                     to="/courses/create"
                                 >
-                                    create course
+                                    Create course
                                 </Link>
                             </div>
                         )}
@@ -215,9 +216,7 @@ export default class Main extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <button
-                                            className="btn btn-primary btn-block"
-                                        >
+                                        <button className="btn btn-primary btn-block">
                                             Find
                                         </button>
                                     </div>

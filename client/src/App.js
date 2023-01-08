@@ -60,11 +60,11 @@ class App extends Component {
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <Link to={'/'} className="navbar-brand">
-                        classroomy
+                        Classroomy
                     </Link>
                     <div className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link to={'/home'} className="nav-link">
+                            <Link to={'/'} className="nav-link">
                                 Home
                             </Link>
                         </li>
@@ -125,7 +125,6 @@ class App extends Component {
                 <div className="container mt-3">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/home" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/profile" element={<Profile />} />

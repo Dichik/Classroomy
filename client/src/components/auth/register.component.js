@@ -5,6 +5,7 @@ import CheckButton from 'react-validation/build/button';
 import { isEmail } from 'validator';
 
 import AuthService from '../../services/auth.service';
+import { Link } from 'react-router-dom';
 
 const required = (value) => {
     if (!value) {
@@ -210,6 +211,17 @@ export default class Register extends Component {
                                     <button className="btn btn-primary btn-block">
                                         Sign Up
                                     </button>
+                                </div>
+                                <div>
+                                    <Link
+                                        style={{
+                                            textDecoration: 'none',
+                                            color: 'rgb(119, 119, 119)'
+                                        }}
+                                        to={'/login'}
+                                    >
+                                        Already have account
+                                    </Link>
                                 </div>
                             </div>
                         )}

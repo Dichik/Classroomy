@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import authHeader from '../../services/auth-header';
 import postService from '../../services/post.service';
 import Spinner from '../spinner/spinner.component';
 import './index.css';
@@ -37,15 +38,12 @@ export default function Post() {
         };
         const requestOptions = {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
+            headers: authHeader(),
             body: JSON.stringify(body)
         };
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${id}`,
+                `http://localhost:8080/api/posts/${id}`,
                 requestOptions
             );
             if (!response.ok) {
@@ -96,7 +94,7 @@ export default function Post() {
                                 }}
                                 onClick={handleClick}
                             >
-                                back to course
+                                Back to course
                             </button>
                         </div>
                     </div>
@@ -128,7 +126,7 @@ export default function Post() {
                                 }}
                                 onClick={handleSubmit}
                             >
-                                submit
+                                Submit
                             </button>
                         </div>
                     </form>
