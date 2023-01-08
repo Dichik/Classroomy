@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import AuthService from '../../services/auth.service';
+import './index.css';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -32,30 +33,56 @@ export default class Profile extends Component {
                 {this.state.userReady ? (
                     <div>
                         <header className="jumbotron">
+                            <img
+                                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                alt="profile-img"
+                                className="profile-img-card"
+                            />
                             <h3>
-                                <strong>{currentUser.username}</strong> Profile
+                                <strong>{currentUser.username}</strong>
                             </h3>
                         </header>
-                        <p>
-                            <strong>Token:</strong>{' '}
-                            {currentUser.accessToken.substring(0, 20)} ...{' '}
-                            {currentUser.accessToken.substr(
-                                currentUser.accessToken.length - 20
-                            )}
-                        </p>
-                        <p>
-                            <strong>Id:</strong> {currentUser.id}
-                        </p>
-                        <p>
-                            <strong>Email:</strong> {currentUser.email}
-                        </p>
-                        <strong>Authorities:</strong>
-                        <ul>
-                            {currentUser.roles &&
-                                currentUser.roles.map((role, index) => (
-                                    <li key={index}>{role}</li>
-                                ))}
-                        </ul>
+                        <div className="profile-info">
+                            <p>
+                                <h5>
+                                    <b>Id:</b>
+                                </h5>{' '}
+                                {currentUser.id}
+                            </p>
+                            <p>
+                                <h5>
+                                    <b>Email:</b>
+                                </h5>{' '}
+                                {currentUser.email}
+                            </p>
+                            <p>
+                                <h5>
+                                    <b>Token:</b>
+                                </h5>
+                                <div>
+                                    {' '}
+                                    {currentUser.accessToken.substring(
+                                        0,
+                                        20
+                                    )}{' '}
+                                    ...{' '}
+                                    {currentUser.accessToken.substr(
+                                        currentUser.accessToken.length - 20
+                                    )}
+                                </div>
+                            </p>
+                            <p>
+                                <h5>
+                                    <b>Authorities:</b>
+                                </h5>
+                                <ul>
+                                    {currentUser.roles &&
+                                        currentUser.roles.map((role, index) => (
+                                            <li key={index}>{role}</li>
+                                        ))}
+                                </ul>
+                            </p>
+                        </div>
                     </div>
                 ) : null}
             </div>

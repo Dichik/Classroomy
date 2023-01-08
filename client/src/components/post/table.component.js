@@ -5,14 +5,14 @@ export default function Table({ data }) {
     const columns = useMemo(
         () => [
             {
-                Header: 'deadlines',
+                Header: 'Deadlines',
                 columns: [
                     {
-                        Header: 'title',
+                        Header: 'Title',
                         accessor: 'title'
                     },
                     {
-                        Header: 'date',
+                        Header: 'Date',
                         accessor: 'deadline'
                     }
                 ]

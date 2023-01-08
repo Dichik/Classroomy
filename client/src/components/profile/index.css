@@ -1,0 +1,15 @@
+.profile-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-top: 50px;
+}
+
+p {
+    background-color: aliceblue;
+    padding: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 15px;
+}
