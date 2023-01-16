@@ -59,7 +59,7 @@ public class PostService {
     public List<Post> getAssignmentsForNextWeek() {
         LocalDate nowPlusWeek = LocalDate.now();
         nowPlusWeek = nowPlusWeek.plus(1, ChronoUnit.WEEKS);
-        return this.postRepository.findByDeadlineBefore(Date.valueOf(nowPlusWeek)); // TODO get course name as well in query
+        return this.postRepository.findByDeadlineBefore(Date.valueOf(nowPlusWeek));
     }
 
     public void updateById(Long id, PostDto postDto) throws DeadlineUpdateException {

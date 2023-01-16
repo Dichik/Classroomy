@@ -27,10 +27,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Builder.Default
-    @DecimalMin(value = "0.0")
-    private BigDecimal balance = BigDecimal.ZERO;
-
     @Size(min = 3, max = 20)
     private String username;
 

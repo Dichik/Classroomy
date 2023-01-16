@@ -18,7 +18,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/teachers")
 public class TeacherController {
-    private static final Logger logger = LogManager.getLogger(TeacherController.class);
 
     private final TeacherService teacherService;
     private final ModelMapper modelMapper;
@@ -36,17 +35,6 @@ public class TeacherController {
                 .orElseThrow(() -> new TeacherNotFoundException(String.format("Teacher with id=%s was not found.", id)));
         return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.OK);
     }
-
-//    @PreAuthorize("hasRole('TEACHER')")
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity<?> create(@Valid @RequestBody UserDto userDto) {
-//        User user = this.teacherService.create(userDto);
-//        if (user == null) {
-//            logger.warn("Something went wrong, couldn't create teacher...");
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//        return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
-//    }
 
     @PreAuthorize("hasRole('TEACHER')")
     @RequestMapping(value = "/{id:[\\d+]}", method = RequestMethod.DELETE)
